@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>Random Rationalized - Yogi's corner</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="http://www.everyogi.in/images/logo.jpeg" rel="icon">
+
+<link rel="canonical" href="http://www.everyogi.in/misc/random_rationalized/">
+
+        <meta name="author" content="Yogeswaran Thulasidoss" />
+        <meta name="keywords" content="random,how it works" />
+        <meta name="description" content="I had a requirement to have random numbers generated in a C application. #include &lt;stdlib.h&gt; #include &lt;stdio.h&gt; int main() { int i = 0; for (i = 0; i &lt; 5; i++) { printf(&#34;Random number %d = %ld\n&#34;, i, random()); } return 0; } I ran the code once and saw that random numbers were getting generated. But to my surprise when I ran the code second time, I saw the same numbers getting printed. What??? Does it mean random numbers are predictable? If so, why is it called random? Random and Predictable words literally contradicting each other. But I remember using random.random ..." />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://www.everyogi.in/theme/css/bootstrap.cosmo.min.css" type="text/css"/>
+    <link href="http://www.everyogi.in/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://www.everyogi.in/theme/css/pygments/monokai.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://www.everyogi.in/theme/css/style.css" type="text/css"/>
+        <link href="http://www.everyogi.in/static/custom.css" rel="stylesheet">
+
+        <link href="http://www.everyogi.in/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Yogi's corner ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://www.everyogi.in/" class="navbar-brand">
+<img src="http://www.everyogi.in/images/logo.jpeg" width="24"/> Yogi's corner            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="http://www.everyogi.in/category/c.html">C</a>
+                        </li>
+                        <li >
+                            <a href="http://www.everyogi.in/category/javascript.html">Javascript</a>
+                        </li>
+                        <li class="active">
+                            <a href="http://www.everyogi.in/category/misc.html">Misc</a>
+                        </li>
+                        <li >
+                            <a href="http://www.everyogi.in/category/python.html">Python</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="http://www.everyogi.in/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="http://www.everyogi.in/misc/random_rationalized/"
+                       rel="bookmark"
+                       title="Permalink to Random Rationalized">
+                        Random Rationalized
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2015-05-21T10:26:07+05:30"> Thu 21 May 2015</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="http://www.everyogi.in/tags/random.html">random</a>
+        /
+	<a href="http://www.everyogi.in/tags/how-it-works.html">how it works</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>I had a requirement to have random numbers generated in a C application.</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Random number %d  =  %ld</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">random</span><span class="p">());</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>I ran the code once and saw that random numbers were getting generated.</p>
+<p>But to my surprise when I ran the code second time, I saw the same numbers getting printed.</p>
+<blockquote>
+<p>What??? Does it mean random numbers are predictable? If so, why is it called random?
+<code>Random</code> and <code>Predictable</code> words literally contradicting each other.</p>
+</blockquote>
+<p>But I remember using random.random() in Python which each time gave different output.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">random</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+  <span class="k">print</span> <span class="n">random</span><span class="p">()</span>
+</pre></div>
+
+
+<p>Each time I executed this code I got different set of output.</p>
+<p>Is the random function implementation in libc is so buggy?  Of course, cannot be!!!</p>
+<p>Oh wait. Are we missing something here.</p>
+<blockquote>
+<p>If there is going to some algorithm for generating random numbers it means that we telling the computer to perform a series of steps and give us a result.  If the series of steps is defined it implies that the result is predictable.</p>
+</blockquote>
+<p>But people coming up with such algorithms would have definitely thought about this.</p>
+<blockquote>
+<p>They would have added some variable parameter into the equation making it unpredictable.  That variable parameter can be anything like - derived from current timestamp or current data in the network device.</p>
+</blockquote>
+<p>If so, does it mean Python implementors thought of this and libc implementors missed it?</p>
+<p>When I checked the man page of random() function in my Linux machine.  It said,</p>
+<blockquote>
+<p>The random() function uses a nonlinear additive feedback random  number generator  employing a default table of size 31 long integers to return successive pseudo-random numbers in the range from 0 to RAND_MAX.   The period  of  this  random  number generator is very large, approximately</p>
+</blockquote>
+<div class="highlight"><pre><span></span>   16 * ((2^31) - 1).
+</pre></div>
+
+
+<h4 id="so-this-is-it-it-is-not-random-it-is-actually-pseudo-random">So, this is it.  It is not random it is actually pseudo-random.</h4>
+<p>Meaning of pseudorandom from dictionary,</p>
+<blockquote>
+<p>pseudorandom |ˌsjuːdəʊˈrandəm|
+adjective</p>
+<p>(of a number, a sequence of numbers, or any digital data) satisfying one or more statistical tests for <code>randomness but produced by a definite mathematical procedure.</code> most computers have built-in functions which will generate sequences of pseudorandom numbers.`</p>
+</blockquote>
+<p>Aha. We are there.  Whatever we discussed so far is making sense.</p>
+<blockquote>
+<p>Also, there can be a requirement, where, for some experiment which uses random numbers has to be reproducible.</p>
+</blockquote>
+<p>So thats the reason. Why random() function in libc is returning same sequence.  The same can be achieved even in Python using seed.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Unseeded random number: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()))</span>
+
+        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Seeded random number: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()))</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+        <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+
+<p>The output of the above code twice,</p>
+<div class="highlight"><pre><span></span><span class="o">[</span>ythulasi@YTHULASI-M-C341 test_random<span class="o">]</span>$ date <span class="o">&amp;&amp;</span> python ~/exp/python/test_random/ran.py
+Wed May <span class="m">20</span> 19:45:46 IST 2015
+Unseeded random number: 0.399506141684
+Unseeded random number: 0.591102825052
+Unseeded random number: 0.00522710909826
+Seeded random number: 0.62290169489
+Seeded random number: 0.741786989261
+Seeded random number: 0.795193565566
+
+<span class="o">[</span>ythulasi@YTHULASI-M-C341 test_random<span class="o">]</span>$ date <span class="o">&amp;&amp;</span> python ~/exp/python/test_random/ran.py
+Wed May <span class="m">20</span> 19:45:49 IST 2015
+Unseeded random number: 0.888964633885
+Unseeded random number: 0.000467464175557
+Unseeded random number: 0.0425654580676
+Seeded random number: 0.62290169489
+Seeded random number: 0.741786989261
+Seeded random number: 0.795193565566
+</pre></div>
+
+
+<p>The same seed returns the same sequence.</p>
+<p>So thats the feature of libc, which allows the caller to set <code>same</code> or <code>different</code>  seed each time based on the requirement.</p>
+<blockquote>
+<p>Moral of the story is,</p>
+<ul>
+<li>random numbers generated by computer are only pseudo random numbers.</li>
+</ul>
+<p>Seeds used in random numbers are meant for two reasons,</p>
+<ul>
+<li>
+<p>to increase the degree of randomness</p>
+</li>
+<li>
+<p>to make experiment that uses random numbers reproducible</p>
+</li>
+</ul>
+</blockquote>
+<p>Happy hacking!!!</p>
+<p>This article was first published in <a href="http://www.chennainerd.in/blog/2015/05/21/random-rationalized/">chennainerd.in</a> on MAY 21ST, 2015.</p>
+            </div>
+            <!-- /.entry-content -->
+    <hr />
+    <!-- AddThis Button BEGIN -->
+    <div class="addthis_toolbox addthis_default_style">
+            <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+            <a class="addthis_button_tweet"></a>
+            <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    </div>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5800fd37485cdfec"></script>
+    <!-- AddThis Button END -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<div id="aboutme">
+    <p>
+        <strong>About Yogeswaran Thulasidoss</strong><br/>
+        Passionate programmer.  Proud father.  Prospective agriculturist.
+    </p>
+</div>
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="http://twitter.com/yogeswarant"><i class="fa fa-twitter-square fa-lg"></i> Twitter</a></li>
+                <li class="list-group-item"><a href="https://github.com/yogeswarant"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+                <li class="list-group-item"><a href="https://in.linkedin.com/in/yogeswaran-thulasidoss-ab29a22a"><i class="fa fa-linkedin-square fa-lg"></i> LinkedIn</a></li>
+              </ul>
+            </li>
+
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
+                <ul class="list-group" id="recentposts">
+                    <li class="list-group-item">
+                        <a href="http://www.everyogi.in/misc/random_rationalized/">
+                            Random Rationalized
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="http://www.everyogi.in/c/gcov_code_coverage_tool/">
+                            GCOV - C/C++ Code coverage testing tool
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="http://www.everyogi.in/python/generators_in_python/">
+                            Generators in Python
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="http://www.everyogi.in/javascript/i_am_a_c_programmer_why_i_love_angularjs/">
+                            I am a C programmer. Why I love AngularJS?
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li class="list-group-item"><a href="http://www.everyogi.in/tags.html"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                </ul>
+            </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 Yogeswaran Thulasidoss
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://www.everyogi.in/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://www.everyogi.in/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://www.everyogi.in/theme/js/respond.min.js"></script>
+
+</body>
+</html>

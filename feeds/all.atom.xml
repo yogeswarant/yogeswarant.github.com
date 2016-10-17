@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Yogi's corner</title><link href="http://www.everyogi.in/" rel="alternate"></link><link href="http://www.everyogi.in/feeds/all.atom.xml" rel="self"></link><id>http://www.everyogi.in/</id><updated>2015-05-21T10:26:07+05:30</updated><entry><title>Random Rationalized</title><link href="http://www.everyogi.in/misc/random_rationalized/" rel="alternate"></link><published>2015-05-21T10:26:07+05:30</published><updated>2015-05-21T10:26:07+05:30</updated><author><name>Yogeswaran Thulasidoss</name></author><id>tag:www.everyogi.in,2015-05-21:misc/random_rationalized/</id><summary type="html">&lt;p&gt;I had a requirement to have random numbers generated in a C application.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdlib.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Random number %d  =  %ld&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I ran the code once and saw that random numbers were getting generated.&lt;/p&gt;
+&lt;p&gt;But to my surprise when I ran the code second time, I saw the same numbers getting printed.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;What??? Does it mean random numbers are predictable? If so, why is it called random?
+&lt;code&gt;Random&lt;/code&gt; and &lt;code&gt;Predictable&lt;/code&gt; words literally contradicting each other.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;But I remember using random.random ...&lt;/p&gt;</summary><category term="random"></category><category term="how it works"></category></entry><entry><title>GCOV - C/C++ Code coverage testing tool</title><link href="http://www.everyogi.in/c/gcov_code_coverage_tool/" rel="alternate"></link><published>2014-06-08T11:39:18+05:30</published><updated>2014-06-08T11:39:18+05:30</updated><author><name>Yogeswaran Thulasidoss</name></author><id>tag:www.everyogi.in,2014-06-08:c/gcov_code_coverage_tool/</id><summary type="html">&lt;h2 id="what-is-gcov"&gt;What is GCOV&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;GCC provides GCOV, code coverage testing tool for C/C++ programs.&lt;/li&gt;
+&lt;li&gt;GCOV identifies the lines of code that got executed while running the program.&lt;/li&gt;
+&lt;li&gt;It also gives additional information like how many times particular line got executed.&lt;/li&gt;
+&lt;li&gt;Also provides information about how many possible branches are there in the code and which branch path got executed more.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="use-cases"&gt;Use cases&lt;/h2&gt;
+&lt;h3 id="optimization"&gt;Optimization&lt;/h3&gt;
+&lt;p&gt;GCOV identifies the sections in the code that are heavy executed,
+using which we'll be able to &lt;strong&gt;focus on optimizing the parts of the code
+which are executed often&lt;/strong&gt;.&lt;/p&gt;
+&lt;h3 id="identifying-dead-code"&gt;Identifying dead code&lt;/h3&gt;
+&lt;p&gt;Any code that got ...&lt;/p&gt;</summary><category term="code coverage"></category><category term="c"></category><category term="cpp"></category><category term="how to"></category></entry><entry><title>Generators in Python</title><link href="http://www.everyogi.in/python/generators_in_python/" rel="alternate"></link><published>2014-05-19T11:01:58+05:30</published><updated>2014-05-19T11:01:58+05:30</updated><author><name>Yogeswaran Thulasidoss</name></author><id>tag:www.everyogi.in,2014-05-19:python/generators_in_python/</id><summary type="html">&lt;p&gt;One of the few obscure feature of python (for the beginners) is &lt;strong&gt;Generators&lt;/strong&gt;.
+In this post I would like to share few naive questions I had about generators
+and the answers I got after understanding them.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Question 1:&lt;/strong&gt; Are generators something like static variables in C?  Say, generateFibonacciNumber() is a generator.   First time I call generateFibonacciNumber() and iterate upto value 5, the next time I call  generateFibonacciNumber() will it start returning from value 8 when iterated?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This could sound like most dumb question on earth, but honestly I had this
+question having come from C background.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Answer:&lt;/strong&gt;  No. Generators should ...&lt;/p&gt;</summary><category term="python"></category><category term="generators"></category><category term="how it works"></category></entry><entry><title>I am a C programmer. Why I love AngularJS?</title><link href="http://www.everyogi.in/javascript/i_am_a_c_programmer_why_i_love_angularjs/" rel="alternate"></link><published>2014-02-22T19:01:42+05:30</published><updated>2014-02-22T19:01:42+05:30</updated><author><name>Yogeswaran Thulasidoss</name></author><id>tag:www.everyogi.in,2014-02-22:javascript/i_am_a_c_programmer_why_i_love_angularjs/</id><summary type="html">&lt;p&gt;The intended audience for this blog are not the people who have profound knowledge in HTML and Javascript.  This is only for those who are in inertia to experiment with web development.  Also, please be aware that this is not beginner's tutorial for AngularJS.&lt;/p&gt;
+&lt;p&gt;I have this habit of trying some web related stuff rarely once in a year.  Couple of years back on a fine morning started to play with jQuery and was impressed by its power.  But at the end of the day thought there is so much to APIs to remember or at least be aware ...&lt;/p&gt;</summary><category term="angularjs"></category><category term="javascript"></category><category term="html"></category><category term="opinion"></category></entry></feed>

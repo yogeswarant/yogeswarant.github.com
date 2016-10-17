@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Yogi's corner</title><link href="http://www.everyogi.in/" rel="alternate"></link><link href="http://www.everyogi.in/feeds/misc.atom.xml" rel="self"></link><id>http://www.everyogi.in/</id><updated>2015-05-21T10:26:07+05:30</updated><entry><title>Random Rationalized</title><link href="http://www.everyogi.in/misc/random_rationalized/" rel="alternate"></link><published>2015-05-21T10:26:07+05:30</published><updated>2015-05-21T10:26:07+05:30</updated><author><name>Yogeswaran Thulasidoss</name></author><id>tag:www.everyogi.in,2015-05-21:misc/random_rationalized/</id><summary type="html">&lt;p&gt;I had a requirement to have random numbers generated in a C application.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdlib.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Random number %d  =  %ld&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I ran the code once and saw that random numbers were getting generated.&lt;/p&gt;
+&lt;p&gt;But to my surprise when I ran the code second time, I saw the same numbers getting printed.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;What??? Does it mean random numbers are predictable? If so, why is it called random?
+&lt;code&gt;Random&lt;/code&gt; and &lt;code&gt;Predictable&lt;/code&gt; words literally contradicting each other.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;But I remember using random.random ...&lt;/p&gt;</summary><category term="random"></category><category term="how it works"></category></entry></feed>

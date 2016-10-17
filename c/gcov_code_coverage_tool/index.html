@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>GCOV - C/C++ Code coverage testing tool - Yogi's corner</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="http://www.everyogi.in/images/logo.jpeg" rel="icon">
+
+<link rel="canonical" href="http://www.everyogi.in/c/gcov_code_coverage_tool/">
+
+        <meta name="author" content="Yogeswaran Thulasidoss" />
+        <meta name="keywords" content="code coverage,c,cpp,how to" />
+        <meta name="description" content="What is GCOV GCC provides GCOV, code coverage testing tool for C/C++ programs. GCOV identifies the lines of code that got executed while running the program. It also gives additional information like how many times particular line got executed. Also provides information about how many possible branches are there in the code and which branch path got executed more. Use cases Optimization GCOV identifies the sections in the code that are heavy executed, using which we&#39;ll be able to focus on optimizing the parts of the code which are executed often. Identifying dead code Any code that got ..." />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://www.everyogi.in/theme/css/bootstrap.cosmo.min.css" type="text/css"/>
+    <link href="http://www.everyogi.in/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://www.everyogi.in/theme/css/pygments/monokai.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://www.everyogi.in/theme/css/style.css" type="text/css"/>
+        <link href="http://www.everyogi.in/static/custom.css" rel="stylesheet">
+
+        <link href="http://www.everyogi.in/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Yogi's corner ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://www.everyogi.in/" class="navbar-brand">
+<img src="http://www.everyogi.in/images/logo.jpeg" width="24"/> Yogi's corner            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="http://www.everyogi.in/category/c.html">C</a>
+                        </li>
+                        <li >
+                            <a href="http://www.everyogi.in/category/javascript.html">Javascript</a>
+                        </li>
+                        <li >
+                            <a href="http://www.everyogi.in/category/misc.html">Misc</a>
+                        </li>
+                        <li >
+                            <a href="http://www.everyogi.in/category/python.html">Python</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="http://www.everyogi.in/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="http://www.everyogi.in/c/gcov_code_coverage_tool/"
+                       rel="bookmark"
+                       title="Permalink to GCOV - C/C++ Code coverage testing tool">
+                        GCOV - C/C++ Code coverage testing tool
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2014-06-08T11:39:18+05:30"> Sun 08 June 2014</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="http://www.everyogi.in/tags/code-coverage.html">code coverage</a>
+        /
+	<a href="http://www.everyogi.in/tags/c.html">c</a>
+        /
+	<a href="http://www.everyogi.in/tags/cpp.html">cpp</a>
+        /
+	<a href="http://www.everyogi.in/tags/how-to.html">how to</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <h2 id="what-is-gcov">What is GCOV</h2>
+<ul>
+<li>GCC provides GCOV, code coverage testing tool for C/C++ programs.</li>
+<li>GCOV identifies the lines of code that got executed while running the program.</li>
+<li>It also gives additional information like how many times particular line got executed.</li>
+<li>Also provides information about how many possible branches are there in the code and which branch path got executed more.</li>
+</ul>
+<h2 id="use-cases">Use cases</h2>
+<h3 id="optimization">Optimization</h3>
+<p>GCOV identifies the sections in the code that are heavy executed,
+using which we'll be able to <strong>focus on optimizing the parts of the code
+which are executed often</strong>.</p>
+<h3 id="identifying-dead-code">Identifying dead code</h3>
+<p>Any code that got compiled but never got executed on any possible scenario can be
+found using GCOV.  Removing such code can help in <strong>reducing the memory footprint</strong>
+of the program.  This can be vital information for programs running on embedded platforms.</p>
+<h3 id="reliability-of-testing">Reliability of testing</h3>
+<p>The coverage report can help in <strong>identifying the gaps in testing</strong>.<br />
+The coverage information can be used for writing test cases to exercise
+the uncovered area in the code.</p>
+<h2 id="instrumenting-gcov">Instrumenting GCOV</h2>
+<p>GCOV does not require any change in the code. The only requirement is to have the code built with <strong>-fprofile-arcs</strong> and
+<strong>-ftest-coverage</strong>  compiler and linker flags.</p>
+<div class="highlight"><pre><span></span><span class="n">yogi</span><span class="err">@</span><span class="nl">u32</span><span class="p">:</span><span class="o">~/</span><span class="n">gcov_basics</span><span class="err">$</span> <span class="n">ls</span> <span class="o">-</span><span class="n">l</span>
+<span class="n">total</span> <span class="mi">8</span>
+<span class="o">-</span><span class="n">rwxrwx</span><span class="o">---</span> <span class="mi">1</span> <span class="n">yogi</span> <span class="n">vboxsf</span> <span class="mi">131</span> <span class="n">Jun</span>  <span class="mi">7</span> <span class="mi">15</span><span class="o">:</span><span class="mi">13</span> <span class="n">coverage</span><span class="p">.</span><span class="n">c</span>
+<span class="o">-</span><span class="n">rwxrwx</span><span class="o">---</span> <span class="mi">1</span> <span class="n">yogi</span> <span class="n">vboxsf</span> <span class="mi">286</span> <span class="n">Jun</span>  <span class="mi">7</span> <span class="mi">15</span><span class="o">:</span><span class="mi">56</span> <span class="n">Makefile</span>
+<span class="n">yogi</span><span class="err">@</span><span class="nl">u32</span><span class="p">:</span><span class="o">~/</span><span class="n">gcov_basics</span><span class="err">$</span> <span class="n">cat</span> <span class="n">coverage</span><span class="p">.</span><span class="n">c</span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;True</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+  <span class="k">else</span>
+    <span class="nf">printf</span><span class="p">(</span><span class="s">&quot;False</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">yogi</span><span class="err">@</span><span class="nl">u32</span><span class="p">:</span><span class="o">~/</span><span class="n">gcov_basics</span><span class="err">$</span> <span class="n">cat</span> <span class="n">Makefile</span>
+<span class="n">CC</span><span class="o">=</span><span class="n">gcc</span>
+<span class="n">CFLAGS</span><span class="o">=-</span><span class="n">fprofile</span><span class="o">-</span><span class="n">arcs</span> <span class="o">-</span><span class="n">ftest</span><span class="o">-</span><span class="n">coverage</span>
+<span class="n">LDFLAGS</span><span class="o">=-</span><span class="n">fprofile</span><span class="o">-</span><span class="n">arcs</span> <span class="o">-</span><span class="n">ftest</span><span class="o">-</span><span class="n">coverage</span>
+<span class="n">TARGET</span><span class="o">=</span><span class="n">cov</span>
+<span class="n">SRC</span><span class="o">=</span><span class="n">coverage</span><span class="p">.</span><span class="n">c</span>
+
+<span class="nl">all</span><span class="p">:</span>    <span class="n">obj</span>
+  <span class="err">$</span><span class="p">(</span><span class="n">CC</span><span class="p">)</span> <span class="err">$</span><span class="p">(</span><span class="n">LDFLAGS</span><span class="p">)</span> <span class="o">*</span><span class="p">.</span><span class="n">o</span> <span class="o">-</span><span class="n">o</span> <span class="err">$</span><span class="p">(</span><span class="n">TARGET</span><span class="p">)</span>
+<span class="nl">obj</span><span class="p">:</span>
+  <span class="err">$</span><span class="p">(</span><span class="n">CC</span><span class="p">)</span> <span class="err">$</span><span class="p">(</span><span class="n">CFLAGS</span><span class="p">)</span> <span class="o">-</span><span class="n">c</span> <span class="err">$</span><span class="p">(</span><span class="n">SRC</span><span class="p">)</span>
+<span class="nl">clean</span><span class="p">:</span>
+  <span class="n">rm</span> <span class="o">-</span><span class="n">f</span> <span class="err">$</span><span class="p">(</span><span class="n">TARGET</span><span class="p">)</span> <span class="o">*</span><span class="p">.</span><span class="n">html</span> <span class="o">*</span><span class="p">.</span><span class="n">gc</span><span class="o">*</span> <span class="o">*</span><span class="p">.</span><span class="n">o</span>
+<span class="nl">gcov</span><span class="p">:</span>
+  <span class="n">gcovr</span> <span class="o">-</span><span class="n">r</span> <span class="p">.</span> <span class="o">--</span><span class="n">html</span> <span class="o">-</span><span class="n">o</span> <span class="n">coverage</span><span class="p">.</span><span class="n">html</span> <span class="o">--</span><span class="n">html</span><span class="o">-</span><span class="n">details</span>
+</pre></div>
+
+
+<blockquote>
+<p>CFLAGS += -fprofile-arcs -ftest-coverage</p>
+</blockquote>
+<p><code>CFLAGS</code> are meant to be used during compilation. This will create <code>.gcno</code> file corresponding to <code>.c/.cpp</code> file</p>
+<div class="highlight"><pre><span></span>yogi@u32:~/gcov_basics$ make obj
+gcc -fprofile-arcs -ftest-coverage -c coverage.c
+yogi@u32:~/gcov_basics$ ls -l
+total 16
+-rwxrwx--- 1 yogi vboxsf  131 Jun  7 15:13 coverage.c
+-rw-rw-r-- 1 yogi yogi    396 Jun  7 15:56 coverage.gcno
+-rw-rw-r-- 1 yogi yogi   1824 Jun  7 15:56 coverage.o
+-rwxrwx--- 1 yogi vboxsf  286 Jun  7 15:56 Makefile
+</pre></div>
+
+
+<blockquote>
+<p>LDFLAGS += -fprofile-arcs -ftest-coverage</p>
+</blockquote>
+<p><code>LDFLAGS</code> are meant to be used during linking.  </p>
+<div class="highlight"><pre><span></span>yogi@u32:~/gcov_basics$ make
+gcc -fprofile-arcs -ftest-coverage -c coverage.c
+gcc -fprofile-arcs -ftest-coverage *.o -o cov
+yogi@u32:~/gcov_basics$ ls -l
+total 36
+-rwxrwxr-x 1 yogi yogi   17295 Jun  7 15:56 cov
+-rwxrwx--- 1 yogi vboxsf   131 Jun  7 15:13 coverage.c
+-rw-rw-r-- 1 yogi yogi     396 Jun  7 15:56 coverage.gcno
+-rw-rw-r-- 1 yogi yogi    1824 Jun  7 15:56 coverage.o
+-rwxrwx--- 1 yogi vboxsf   286 Jun  7 15:56 Makefile
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>yogi@u32:~/gcov_basics$ ./cov
+True
+yogi@u32:~/gcov_basics$ ls -l
+total 40
+-rwxrwxr-x 1 yogi yogi   17295 Jun  7 15:56 cov
+-rwxrwx--- 1 yogi vboxsf   131 Jun  7 15:13 coverage.c
+-rw-rw-r-- 1 yogi yogi     160 Jun  7 15:56 coverage.gcda
+-rw-rw-r-- 1 yogi yogi     396 Jun  7 15:56 coverage.gcno
+-rw-rw-r-- 1 yogi yogi    1824 Jun  7 15:56 coverage.o
+-rwxrwx--- 1 yogi vboxsf   286 Jun  7 15:56 Makefile
+</pre></div>
+
+
+<p><code>.gcno</code> has static information about the file.</p>
+<p><code>.gcda</code> has dynamic information about the file based on the path taken during execution.</p>
+<p><code>.gcno</code> and <code>.gcda</code> files together are required to generate the coverage report.</p>
+<h2 id="generating-report">Generating Report</h2>
+<p>Either <strong>gcov</strong> or <strong>gcovr</strong> can be used for generating coverage report.</p>
+<p><strong>gcov</strong> utility will be installed as part of <strong>gcc</strong> in most of the Linux distributions.</p>
+<div class="highlight"><pre><span></span><span class="nt">yogi</span><span class="k">@u32</span><span class="o">:~/</span><span class="nt">gcov_basics</span><span class="o">$</span> <span class="nt">gcov</span> <span class="nt">coverage</span><span class="nc">.c</span>
+<span class="nt">File</span> <span class="s1">&#39;coverage.c&#39;</span>
+<span class="nt">Lines</span> <span class="nt">executed</span><span class="nd">:80</span><span class="nc">.00</span><span class="o">%</span> <span class="nt">of</span> <span class="nt">5</span>
+<span class="nt">coverage</span><span class="nc">.c</span><span class="nd">:creating</span> <span class="s1">&#39;coverage.c.gcov&#39;</span>
+
+<span class="nt">yogi</span><span class="k">@u32</span><span class="o">:~/</span><span class="nt">gcov_basics</span><span class="o">$</span> <span class="nt">cat</span> <span class="nt">coverage</span><span class="nc">.c.gcov</span>
+        <span class="nt">-</span><span class="o">:</span>    <span class="nt">0</span><span class="nd">:Source:coverage</span><span class="nc">.c</span>
+        <span class="nt">-</span><span class="o">:</span>    <span class="nt">0</span><span class="nd">:Graph:coverage</span><span class="nc">.gcno</span>
+        <span class="nt">-</span><span class="o">:</span>    <span class="nt">0</span><span class="nd">:Data:coverage</span><span class="nc">.gcda</span>
+        <span class="nt">-</span><span class="o">:</span>    <span class="nt">0</span><span class="nd">:Runs:1</span>
+        <span class="nt">-</span><span class="o">:</span>    <span class="nt">0</span><span class="nd">:Programs:1</span>
+        <span class="nt">-</span><span class="o">:</span>    <span class="nt">1</span><span class="o">:</span><span class="nn">#include</span> <span class="o">&lt;</span><span class="nt">stdio</span><span class="nc">.h</span><span class="o">&gt;</span>
+        <span class="nt">1</span><span class="o">:</span>    <span class="nt">2</span><span class="nd">:int</span> <span class="nt">main</span><span class="o">(</span><span class="nt">int</span> <span class="nt">argc</span><span class="o">,</span> <span class="nt">char</span><span class="o">*</span> <span class="nt">argv</span><span class="cp">[]</span><span class="o">)</span>
+        <span class="nt">-</span><span class="o">:</span>    <span class="nt">3</span><span class="o">:</span><span class="p">{</span>
+        <span class="nt">1</span><span class="o">:</span>    <span class="nt">4</span><span class="o">:</span>    <span class="nt">if</span> <span class="o">(</span><span class="nt">argc</span> <span class="o">==</span> <span class="nt">1</span><span class="o">)</span>
+        <span class="nt">1</span><span class="o">:</span>    <span class="nt">5</span><span class="o">:</span>        <span class="nt">printf</span><span class="o">(</span><span class="s2">&quot;True\n&quot;</span><span class="o">);</span>
+        <span class="nt">-</span><span class="o">:</span>    <span class="nt">6</span><span class="o">:</span>    <span class="nt">else</span>
+    <span class="err">#####</span><span class="o">:</span>    <span class="nt">7</span><span class="o">:</span>        <span class="nt">printf</span><span class="o">(</span><span class="s2">&quot;False\n&quot;</span><span class="o">);</span>
+        <span class="nt">1</span><span class="o">:</span>    <span class="nt">8</span><span class="o">:</span>    <span class="nt">return</span> <span class="nt">0</span><span class="o">;</span>
+        <span class="nt">-</span><span class="o">:</span>    <span class="nt">9</span><span class="o">:</span><span class="p">}</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>Legend:
+  -       indicates not an executable statement
+  #####   indicates statement the did not get executed
+  1       (or any number) indicates the number of times the statement got executed.
+</pre></div>
+
+
+<p><strong>gcovr</strong> is a python utility on top of gcov.  It can be installed using pip.</p>
+<div class="highlight"><pre><span></span>$ pip install gcovr
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>yogi@u32:~/gcov_basics$ gcovr -r . --html -o coverage.html --html-details
+</pre></div>
+
+
+<p>The above command will generate coverage report in html format.</p>
+<h2 id="cool-features">Cool features</h2>
+<ul>
+<li>
+<p>GCOV takes care of <strong>conditional compilation</strong>.  If a file has 100 lines of code but only 50 lines of code got conditionally compiled using ifdef, then, only 50 lines is taken into account for calculating the code coverage.</p>
+</li>
+<li>
+<p>GCOV when enabled on <strong>shared library</strong> and called from two different applications, will consolidate the coverage based on execution of both the applications.</p>
+</li>
+<li>
+<p>GCOV works <strong>across reboot</strong>.  The execution information can be collected and consolidated across reboot.</p>
+</li>
+<li>
+<p>Running the <strong>same executable multiple instances</strong>, appends execution information to .gcda file.</p>
+</li>
+<li>
+<p>Coverage can be <strong>collected from different physical machines</strong> by copying the executable and .gcda files.</p>
+</li>
+</ul>
+<h2 id="pointer-to-ponder">Pointer to ponder</h2>
+<ul>
+<li>
+<p>The <strong>number of lines in the file does not match exactly with the number of lines considered for testing coverage</strong>.  One reason is, <strong>not all lines are statement</strong> to be executed. Say, '{' in a line is not a candidate for execution. Or it could be due to <strong>compiler optimization</strong>.</p>
+</li>
+<li>
+<p>The <strong>version of .gcno file and .gcda file should exactly match</strong> to generate report.  If the code was compiled again even without any change, report will not get generated as there is mismatch in the version of .gcno and .gcda files.</p>
+</li>
+<li>
+<p>If .gcno file was created again even without changing anything in the code it will not match with .gcda file.</p>
+</li>
+<li>
+<p>The program should <strong>gracefully exit</strong> to create/append-to .gcda file.  </p>
+</li>
+<li>
+<p>If the program is a daemon, better to add <strong>exit(0) in the SIGINT and SIGTERM signal handler.</strong> to do a graceful exit.</p>
+</li>
+<li>
+<p>GCOV will try to create <strong>.gcda file in the same folder structure as it was compiled</strong>.
+But the problem could be when used on embedded platforms, where the filesystem is mostly readonly.
+In this case, <strong>GCOV_PREFIX</strong> enviromental variable can be used.</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span>yogi@u32:~/gcov_basics$ make
+gcc -fprofile-arcs -ftest-coverage -c coverage.c
+gcc -fprofile-arcs -ftest-coverage *.o -o cov
+
+Note: Copying the executable to /tmp folder
+
+yogi@u32:~/gcov_basics$ cp cov /tmp/
+yogi@u32:~/gcov_basics$ ls -l
+total 36
+-rwxrwxr-x 1 yogi yogi   17295 Jun  8 07:30 cov
+-rwxrwx--- 1 yogi vboxsf   131 Jun  7 15:13 coverage.c
+-rw-rw-r-- 1 yogi yogi     396 Jun  8 07:30 coverage.gcno
+-rw-rw-r-- 1 yogi yogi    1824 Jun  8 07:30 coverage.o
+-rwxrwx--- 1 yogi vboxsf   286 Jun  7 16:32 Makefile
+yogi@u32:~/gcov_basics$ cd /tmp/
+yogi@u32:/tmp$ ./cov
+True
+yogi@u32:/tmp$ find . -name &quot;*.gcda&quot;
+
+Note: gcda file will not get created in the current working directory, instead
+will be created in the same folder structure as it got compiled.
+
+yogi@u32:/tmp$ cd -
+/home/yogi/gcov_basics
+
+Note: gcda file getting created where the code was actually compiled.
+
+yogi@u32:~/gcov_basics$ ls -l
+total 40
+-rwxrwxr-x 1 yogi yogi   17295 Jun  8 07:30 cov
+-rwxrwx--- 1 yogi vboxsf   131 Jun  7 15:13 coverage.c
+-rw-rw-r-- 1 yogi yogi     160 Jun  8 07:30 coverage.gcda
+-rw-rw-r-- 1 yogi yogi     396 Jun  8 07:30 coverage.gcno
+-rw-rw-r-- 1 yogi yogi    1824 Jun  8 07:30 coverage.o
+-rwxrwx--- 1 yogi vboxsf   286 Jun  7 16:32 Makefile
+yogi@u32:~/gcov_basics$
+yogi@u32:~/gcov_basics$ export GCOV_PREFIX=/tmp
+yogi@u32:~/gcov_basics$ rm coverage.gcda
+yogi@u32:~/gcov_basics$ cd -
+/tmp
+yogi@u32:/tmp$ ./cov
+True
+
+Note: By setting GCOV_PREFIX environmental variable we&#39;ll be able to direct
+the files to a particular base folder.
+
+yogi@u32:/tmp$ ls -l /tmp/home/yogi/gcov_basics/coverage.gcda
+-rw-rw-r-- 1 yogi yogi 160 Jun  8 07:31 /tmp/home/yogi/gcov_basics/coverage.gcda
+</pre></div>
+
+
+<ul>
+<li><strong>GCOV_PREFIX_STRIP</strong> environmental variable can be handy when we are not interested in complete folder structure but to remove certain part of it.</li>
+</ul>
+<div class="highlight"><pre><span></span>yogi@u32:/tmp$ export GCOV_PREFIX=/tmp
+yogi@u32:/tmp$ export GCOV_PREFIX_STRIP=2
+yogi@u32:/tmp$ ./cov
+True
+
+Note:  Earlier .gcda file was getting created in /tmp/home/yogi/gcov_basics/ folder.
+Now by exporting GCOV_PREFIX_STRIP=2 environmental variable, will strip two levels - /home/yogi/ folder
+is stripped off and .gcda file will get create in /tmp/gcov_basics/
+
+yogi@u32:/tmp$ ls -l /tmp/gcov_basics/coverage.gcda
+-rw-rw-r-- 1 yogi yogi 160 Jun  8 07:44 /tmp/gcov_basics/coverage.gcda
+</pre></div>
+
+
+<h2 id="faqs">FAQs</h2>
+<p>1.undefined reference to <code>__gcov_init</code></p>
+<div class="highlight"><pre><span></span>yogi@u32:~/gcov_basics$ make
+gcc -fprofile-arcs -ftest-coverage -c coverage.c
+gcc  *.o -o cov
+coverage.o: In function `_GLOBAL__sub_I_65535_0_main&#39;:
+coverage.c:(.text+0xae): undefined reference to `__gcov_init&#39;
+coverage.o:(.data+0x24): undefined reference to `__gcov_merge_add&#39;
+collect2: ld returned 1 exit status
+make: *** [all] Error 1
+</pre></div>
+
+
+<blockquote>
+<p>The reason for this is, <strong>-fprofile-arcs</strong> and <strong>-ftest-coverage</strong> where used during compilation(in CFLAGS), but missed during linking (in LDFLAGS).</p>
+</blockquote>
+<p>2.<code>.gcda</code> file not getting created as the result of execution.</p>
+<blockquote>
+<p>Check if gcov symbols are there in the binary using <strong>strings</strong> or <strong>nm</strong> command.</p>
+<p><strong>ldd</strong> command <strong>will not help</strong> because there will not be any extra libraries linked specifically for gcov.</p>
+</blockquote>
+<p>Binary <strong>without gcov symbols</strong> will look like the one shown below.</p>
+<div class="highlight"><pre><span></span>yogi@u32:~/gcov_basics$ strings cov
+/lib/ld-linux.so.2
+__gmon_start__
+libc.so.6
+_IO_stdin_used
+puts
+__libc_start_main
+GLIBC_2.0
+PTRh
+UWVS
+[^_]
+True
+False
+;*2$&quot;
+</pre></div>
+
+
+<p>Binary <strong>with gcov symbols</strong> will look like the one shown below.</p>
+<div class="highlight"><pre><span></span>yogi@u32:~/gcov_basics$ strings cov
+/lib/ld-linux.so.2
+__gmon_start__
+libc.so.6
+_IO_stdin_used
+...
+[^_]
+True
+False
+/home/yogi/gcov_basics/coverage.gcda
+profiling:%s:Version mismatch - expected %.4s got %.4s
+profiling:%s:Overflow merging
+profiling:%s:Overflow writing
+profiling:%s:Cannot create directory
+profiling:%s:Not a gcov data file
+profiling:%s:Merge mismatch for %s
+profiling:%s:Invocation mismatch - some data files may have been removed%s
+function
+summaries
+profiling:%s:Error merging
+profiling:%s:Error writing
+GCOV_PREFIX_STRIP
+GCOV_PREFIX
+profiling:%s:Skip
+profiling:%s:Cannot open
+...
+</pre></div>
+
+
+<blockquote>
+<p>The reason for this could be <strong>-fprofile-arcs and -ftest-coverage CFLAGS</strong> were missed during compilation.</p>
+</blockquote>
+<p>3.gcov symbols are seen in the binary but still .gcda file is not getting created.</p>
+<blockquote>
+<p>The reason could be the program did not do a graceful exit.</p>
+</blockquote>
+<p>We’d love to hear more about your experiences with c/c++ code coverage.
+ Please share your thoughts in the comments below.</p>
+<p>This article was first published in <a href="http://www.chennainerd.in/blog/2014/06/08/gcov-c-slash-c-plus-plus-code-coverage-testing-tool/">chennainerd.in</a> on JUN 8TH, 2014.</p>
+            </div>
+            <!-- /.entry-content -->
+    <hr />
+    <!-- AddThis Button BEGIN -->
+    <div class="addthis_toolbox addthis_default_style">
+            <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+            <a class="addthis_button_tweet"></a>
+            <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    </div>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5800fd37485cdfec"></script>
+    <!-- AddThis Button END -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<div id="aboutme">
+    <p>
+        <strong>About Yogeswaran Thulasidoss</strong><br/>
+        Passionate programmer.  Proud father.  Prospective agriculturist.
+    </p>
+</div>
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="http://twitter.com/yogeswarant"><i class="fa fa-twitter-square fa-lg"></i> Twitter</a></li>
+                <li class="list-group-item"><a href="https://github.com/yogeswarant"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+                <li class="list-group-item"><a href="https://in.linkedin.com/in/yogeswaran-thulasidoss-ab29a22a"><i class="fa fa-linkedin-square fa-lg"></i> LinkedIn</a></li>
+              </ul>
+            </li>
+
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
+                <ul class="list-group" id="recentposts">
+                    <li class="list-group-item">
+                        <a href="http://www.everyogi.in/misc/random_rationalized/">
+                            Random Rationalized
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="http://www.everyogi.in/c/gcov_code_coverage_tool/">
+                            GCOV - C/C++ Code coverage testing tool
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="http://www.everyogi.in/python/generators_in_python/">
+                            Generators in Python
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="http://www.everyogi.in/javascript/i_am_a_c_programmer_why_i_love_angularjs/">
+                            I am a C programmer. Why I love AngularJS?
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li class="list-group-item"><a href="http://www.everyogi.in/tags.html"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                </ul>
+            </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 Yogeswaran Thulasidoss
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://www.everyogi.in/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://www.everyogi.in/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://www.everyogi.in/theme/js/respond.min.js"></script>
+
+</body>
+</html>

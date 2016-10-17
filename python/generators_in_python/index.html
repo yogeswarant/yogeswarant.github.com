@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en"
+>
+<head>
+    <title>Generators in Python - Yogi's corner</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="http://www.everyogi.in/images/logo.jpeg" rel="icon">
+
+<link rel="canonical" href="http://www.everyogi.in/python/generators_in_python/">
+
+        <meta name="author" content="Yogeswaran Thulasidoss" />
+        <meta name="keywords" content="python,generators,how it works" />
+        <meta name="description" content="One of the few obscure feature of python (for the beginners) is Generators. In this post I would like to share few naive questions I had about generators and the answers I got after understanding them. Question 1: Are generators something like static variables in C? Say, generateFibonacciNumber() is a generator. First time I call generateFibonacciNumber() and iterate upto value 5, the next time I call generateFibonacciNumber() will it start returning from value 8 when iterated? This could sound like most dumb question on earth, but honestly I had this question having come from C background. Answer: No. Generators should ..." />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://www.everyogi.in/theme/css/bootstrap.cosmo.min.css" type="text/css"/>
+    <link href="http://www.everyogi.in/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://www.everyogi.in/theme/css/pygments/monokai.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://www.everyogi.in/theme/css/style.css" type="text/css"/>
+        <link href="http://www.everyogi.in/static/custom.css" rel="stylesheet">
+
+        <link href="http://www.everyogi.in/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Yogi's corner ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://www.everyogi.in/" class="navbar-brand">
+<img src="http://www.everyogi.in/images/logo.jpeg" width="24"/> Yogi's corner            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="http://www.everyogi.in/category/c.html">C</a>
+                        </li>
+                        <li >
+                            <a href="http://www.everyogi.in/category/javascript.html">Javascript</a>
+                        </li>
+                        <li >
+                            <a href="http://www.everyogi.in/category/misc.html">Misc</a>
+                        </li>
+                        <li class="active">
+                            <a href="http://www.everyogi.in/category/python.html">Python</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="http://www.everyogi.in/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="http://www.everyogi.in/python/generators_in_python/"
+                       rel="bookmark"
+                       title="Permalink to Generators in Python">
+                        Generators in Python
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2014-05-19T11:01:58+05:30"> Mon 19 May 2014</time>
+    </span>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="http://www.everyogi.in/tags/python.html">python</a>
+        /
+	<a href="http://www.everyogi.in/tags/generators.html">generators</a>
+        /
+	<a href="http://www.everyogi.in/tags/how-it-works.html">how it works</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>One of the few obscure feature of python (for the beginners) is <strong>Generators</strong>.
+In this post I would like to share few naive questions I had about generators
+and the answers I got after understanding them.</p>
+<blockquote>
+<p><strong>Question 1:</strong> Are generators something like static variables in C?  Say, generateFibonacciNumber() is a generator.   First time I call generateFibonacciNumber() and iterate upto value 5, the next time I call  generateFibonacciNumber() will it start returning from value 8 when iterated?</p>
+</blockquote>
+<p>This could sound like most dumb question on earth, but honestly I had this
+question having come from C background.</p>
+<p><strong>Answer:</strong>  No. Generators should not be confused with static variables in C.
+Every time a generator is called it will return a generator object and each has
+their own state variables.  So iterating one generator will not affect the other.</p>
+<blockquote>
+<p><strong>Question 2:</strong> Creating multiple generators holding their reference and not iterating through them could potentially lead to memory exhaustion, correct?</p>
+</blockquote>
+<p>Phew.  Yet another dumb question.</p>
+<p><strong>Answer:</strong> Obviously if you are going to hold the reference it is going to eat memory.
+But, that is not the problem of generators.  Let's take for example, to process
+a million lines of code we use a <em>generator</em> and a <em>normal function</em>.  At any point
+of time single generator object will hold only state variables and not the memory
+needed to hold all million lines.  But holding the value returned by a normal
+function is like holding million lines in the memory.  Compare holding multiple
+instances of state variables and multiple instance of million lines - the answer is obvious.</p>
+<h3 id="so-what-is-actually-is-a-generator">So, what is actually is a Generator?</h3>
+<p>To understand generator we'll have to understand what is <strong>iterator</strong> in python.</p>
+<p>In simple terms, <strong>iterator</strong> is a object having two methods <code>__iter__()</code> and <code>next()</code>.
+When iterators are using along with looping constructs like <code>for</code>, the <code>__iter__</code> and
+<code>next</code> methods are called implicitly.</p>
+<p>You can find more information on iterators <a href="https://docs.python.org/2/library/stdtypes.html#iterator-types">here</a>.</p>
+<blockquote>
+<p>__iter__() : Returing itself</p>
+<p>next()  : Returning next item, or <strong>StopIteration</strong> exception on no further items.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Iterator</span><span class="p">():</span>
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+
+  <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span>
+
+  <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">i</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">StopIteration</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+  <span class="n">iterator</span> <span class="o">=</span> <span class="n">Iterator</span><span class="p">()</span>
+  <span class="k">print</span> <span class="nb">type</span><span class="p">(</span><span class="n">iterator</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">iterator</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">i</span><span class="p">,</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+  <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+
+<p>Executing this code will give us output as shown below,</p>
+<div class="highlight"><pre><span></span>&lt;type &#39;instance&#39;&gt;
+1 2 3 4 5 6 7 8 9 10
+</pre></div>
+
+
+<p><strong>Generator</strong> is a special iterator.  We will not have to write a class with
+these methods, instead <code>yield</code> keyword can do all the <strong>magic</strong> for us.</p>
+<p>Now, let us rewrite the above code with generator.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generator</span><span class="p">():</span>
+  <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">yield</span> <span class="n">i</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+  <span class="n">gen</span> <span class="o">=</span> <span class="n">generator</span><span class="p">()</span>
+  <span class="k">print</span> <span class="nb">type</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span>
+  <span class="k">print</span> <span class="nb">dir</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">gen</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">i</span><span class="p">,</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+  <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+
+<p>Executing this code will give us output as shown below,</p>
+<div class="highlight"><pre><span></span>&lt;type &#39;generator&#39;&gt;
+[&#39;__class__&#39;, &#39;__delattr__&#39;, &#39;__doc__&#39;, &#39;__format__&#39;, &#39;__getattribute__&#39;, &#39;__hash__&#39;, &#39;__init__&#39;, &#39;__iter__&#39;, &#39;__name__&#39;, &#39;__new__&#39;, &#39;__reduce__&#39;, &#39;__reduce_ex__&#39;, &#39;__repr__&#39;, &#39;__setattr__&#39;, &#39;__sizeof__&#39;, &#39;__str__&#39;, &#39;__subclasshook__&#39;, &#39;close&#39;, &#39;gi_code&#39;, &#39;gi_frame&#39;, &#39;gi_running&#39;, &#39;next&#39;, &#39;send&#39;, &#39;throw&#39;]
+1 2 3 4 5 6 7 8 9 10
+</pre></div>
+
+
+<blockquote>
+<p>Is that all?  Is generator just another method to create iterator?</p>
+<p>But according to the zen of python,</p>
+<p><em>"There should be one-- and preferably only one --obvious way to do it."</em></p>
+</blockquote>
+<p>Hey look, <code>dir(generator)</code> is giving something more than what we would expect from a <code>dir(function)</code>.</p>
+<h3 id="generator-is-more-than-just-an-iterator">Generator is more than just an iterator</h3>
+<p>Let us now dwell deep into generator, for which we'll have to understand <code>yield</code> keyword.</p>
+<p><code>yield</code> as just the literal meaning - relinquishes the control temporarily.</p>
+<p>Whenever a generator function is called, the actual code
+inside the function does not get executed.</p>
+<p>For example, the same code without iterating through items of generator.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generator</span><span class="p">():</span>
+  <span class="k">print</span> <span class="s1">&#39;First line of generator&#39;</span>
+  <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">yield</span> <span class="n">i</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+  <span class="k">print</span> <span class="s1">&#39;Before calling generator&#39;</span>
+  <span class="n">gen</span> <span class="o">=</span> <span class="n">generator</span><span class="p">()</span>
+  <span class="k">print</span> <span class="s1">&#39;After calling generator&#39;</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+  <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+
+<p>Output of this code will look like,</p>
+<div class="highlight"><pre><span></span>Before calling generator
+After calling generator
+</pre></div>
+
+
+<p>You can notice something.  <em>"First line of generator"</em> is
+not printed when generator is invoked.</p>
+<blockquote>
+<p>This is how, generator is different from other functions.  Calling a generator
+function does not execute any code in the function, instead returns a generator
+object.</p>
+<p>So, when does actual code gets executed?</p>
+<p><strong>The actual code gets executed when the next() method is called.</strong></p>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generator</span><span class="p">():</span>
+  <span class="k">print</span> <span class="s1">&#39;In generator() first line&#39;</span>
+  <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">print</span> <span class="s1">&#39;In generator() before yield&#39;</span>
+    <span class="k">yield</span> <span class="n">i</span>
+    <span class="k">print</span> <span class="s1">&#39;In generator() after yield&#39;</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+  <span class="k">print</span> <span class="s1">&#39;In main() before calling generator()&#39;</span>
+  <span class="n">gen</span> <span class="o">=</span> <span class="n">generator</span><span class="p">()</span>
+  <span class="k">print</span> <span class="s1">&#39;In main() after calling generator()&#39;</span>
+  <span class="k">print</span> <span class="s1">&#39;In main() before calling next()&#39;</span>
+  <span class="n">gen</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+  <span class="k">print</span> <span class="s1">&#39;In main() after calling next()&#39;</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+  <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+
+<p>Output of this code will look like this,</p>
+<div class="highlight"><pre><span></span>In main() before calling generator()
+In main() after calling generator()
+In main() before calling next()
+In generator() first line
+In generator() before yield
+In main() after calling next()
+</pre></div>
+
+
+<blockquote>
+<p>It is clear from the example above, that the code inside generator
+actually gets executed when next() method is called.</p>
+<p>One more thing to be noticed here is, the last line of generator
+<strong>'In generator() after yield'</strong> is not getting printed.</p>
+<p>The execution resumes from this point when next() method of the generator
+object is called the next time.</p>
+</blockquote>
+<p>The code snippet below explains this control flow.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generator</span><span class="p">():</span>
+  <span class="k">print</span> <span class="s1">&#39;In generator() first line&#39;</span>
+  <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">print</span> <span class="s1">&#39;In generator() before yield&#39;</span>
+    <span class="k">yield</span> <span class="n">i</span>
+    <span class="k">print</span> <span class="s1">&#39;In generator() after yield&#39;</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+  <span class="k">print</span> <span class="s1">&#39;In main() before calling generator()&#39;</span>
+  <span class="n">gen</span> <span class="o">=</span> <span class="n">generator</span><span class="p">()</span>
+  <span class="k">print</span> <span class="s1">&#39;In main() after calling generator()&#39;</span>
+  <span class="k">print</span> <span class="s1">&#39;In main() before calling next()&#39;</span>
+  <span class="n">gen</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+  <span class="k">print</span> <span class="s1">&#39;In main() after calling next()&#39;</span>
+  <span class="k">print</span> <span class="s1">&#39;In main() before calling next() second time&#39;</span>
+  <span class="n">gen</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+  <span class="k">print</span> <span class="s1">&#39;In main() after calling next() second time&#39;</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+  <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+
+<p>Output of this code will be,</p>
+<div class="highlight"><pre><span></span>In main() before calling generator()
+In main() after calling generator()
+In main() before calling next()
+In generator() first line
+In generator() before yield
+In main() after calling next()
+In main() before calling next() second time
+In generator() after yield
+In generator() before yield
+In main() after calling next() second time
+</pre></div>
+
+
+<h3 id="so-when-to-use-generator-and-when-to-use-iterable">So, when to use generator and when to use iterable?</h3>
+<p>Any iterable can be replaced with a generator but converse is not true.</p>
+<p>Generators are preferred for two reasons,</p>
+<ol>
+<li>When dealing with large sequence</li>
+<li>When the end point of the sequence is not known beforehand</li>
+</ol>
+<p>Thats all about generators in Python.  Happy hacking.</p>
+<p>This article was first published in <a href="http://www.chennainerd.in/blog/2014/05/19/generators-in-python/">chennainerd.in</a> on MAY 19TH, 2014.</p>
+            </div>
+            <!-- /.entry-content -->
+    <hr />
+    <!-- AddThis Button BEGIN -->
+    <div class="addthis_toolbox addthis_default_style">
+            <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+            <a class="addthis_button_tweet"></a>
+            <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    </div>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5800fd37485cdfec"></script>
+    <!-- AddThis Button END -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<div id="aboutme">
+    <p>
+        <strong>About Yogeswaran Thulasidoss</strong><br/>
+        Passionate programmer.  Proud father.  Prospective agriculturist.
+    </p>
+</div>
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="http://twitter.com/yogeswarant"><i class="fa fa-twitter-square fa-lg"></i> Twitter</a></li>
+                <li class="list-group-item"><a href="https://github.com/yogeswarant"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+                <li class="list-group-item"><a href="https://in.linkedin.com/in/yogeswaran-thulasidoss-ab29a22a"><i class="fa fa-linkedin-square fa-lg"></i> LinkedIn</a></li>
+              </ul>
+            </li>
+
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
+                <ul class="list-group" id="recentposts">
+                    <li class="list-group-item">
+                        <a href="http://www.everyogi.in/misc/random_rationalized/">
+                            Random Rationalized
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="http://www.everyogi.in/c/gcov_code_coverage_tool/">
+                            GCOV - C/C++ Code coverage testing tool
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="http://www.everyogi.in/python/generators_in_python/">
+                            Generators in Python
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="http://www.everyogi.in/javascript/i_am_a_c_programmer_why_i_love_angularjs/">
+                            I am a C programmer. Why I love AngularJS?
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li class="list-group-item"><a href="http://www.everyogi.in/tags.html"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                </ul>
+            </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2015 Yogeswaran Thulasidoss
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://www.everyogi.in/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://www.everyogi.in/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://www.everyogi.in/theme/js/respond.min.js"></script>
+
+</body>
+</html>

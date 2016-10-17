@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Yogi's corner</title><link href="http://www.everyogi.in/" rel="alternate"></link><link href="http://www.everyogi.in/feeds/c.atom.xml" rel="self"></link><id>http://www.everyogi.in/</id><updated>2014-06-08T11:39:18+05:30</updated><entry><title>GCOV - C/C++ Code coverage testing tool</title><link href="http://www.everyogi.in/c/gcov_code_coverage_tool/" rel="alternate"></link><published>2014-06-08T11:39:18+05:30</published><updated>2014-06-08T11:39:18+05:30</updated><author><name>Yogeswaran Thulasidoss</name></author><id>tag:www.everyogi.in,2014-06-08:c/gcov_code_coverage_tool/</id><summary type="html">&lt;h2 id="what-is-gcov"&gt;What is GCOV&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;GCC provides GCOV, code coverage testing tool for C/C++ programs.&lt;/li&gt;
+&lt;li&gt;GCOV identifies the lines of code that got executed while running the program.&lt;/li&gt;
+&lt;li&gt;It also gives additional information like how many times particular line got executed.&lt;/li&gt;
+&lt;li&gt;Also provides information about how many possible branches are there in the code and which branch path got executed more.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="use-cases"&gt;Use cases&lt;/h2&gt;
+&lt;h3 id="optimization"&gt;Optimization&lt;/h3&gt;
+&lt;p&gt;GCOV identifies the sections in the code that are heavy executed,
+using which we'll be able to &lt;strong&gt;focus on optimizing the parts of the code
+which are executed often&lt;/strong&gt;.&lt;/p&gt;
+&lt;h3 id="identifying-dead-code"&gt;Identifying dead code&lt;/h3&gt;
+&lt;p&gt;Any code that got ...&lt;/p&gt;</summary><category term="code coverage"></category><category term="c"></category><category term="cpp"></category><category term="how to"></category></entry></feed>
