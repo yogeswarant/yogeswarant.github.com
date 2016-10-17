@@ -44,11 +44,8 @@ TAG_SAVE_AS = 'tags/{slug}.html'
 TAGS_URL = 'tags.html'
 
 #bootstrap customization
-STATIC_PATHS = ['extras/custom.css']
-EXTRA_PATH_METADATA = {
-'extras/custom.css': {'path': 'static/custom.css'}
-}
-CUSTOM_CSS = 'static/custom.css'
+STATIC_PATHS = ['images', 'extras']
+CUSTOM_CSS = 'extras/custom.css'
 
 
 # theme settings
