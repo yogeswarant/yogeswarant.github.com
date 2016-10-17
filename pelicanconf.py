@@ -67,7 +67,13 @@ SUMMARY_MAX_LENGTH = 100
 
 MD_EXTENSIONS = ['toc', 'fenced_code', 'codehilite(css_class=highlight)', 'extra']
 
+#Disqus related settings
 #PLUGINS = PLUGINS + ['disqus_static']
 #DISQUS_SITENAME = 'everyogi-in'
+DISQUS_SITENAME = 'everyogi'
+DISQUS_SHORTNAME = 'everyogi'
+DISQUS_DISPLAY_COUNTS = True
+
+#to share using facebook, twitter and google+
 ADDTHIS_PROFILE ='ra-5800fd37485cdfec'
 ADDTHIS_DATA_TRACK_ADDRESSBAR = False
