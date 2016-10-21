@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Yogi's corner</title><link href="http://www.everyogi.in/" rel="alternate"></link><link href="http://www.everyogi.in/feeds/misc.atom.xml" rel="self"></link><id>http://www.everyogi.in/</id><updated>2015-05-21T10:26:07+05:30</updated><entry><title>Random Rationalized</title><link href="http://www.everyogi.in/misc/random_rationalized/" rel="alternate"></link><published>2015-05-21T10:26:07+05:30</published><updated>2015-05-21T10:26:07+05:30</updated><author><name>Yogeswaran Thulasidoss</name></author><id>tag:www.everyogi.in,2015-05-21:misc/random_rationalized/</id><summary type="html">&lt;p&gt;I had a requirement to have random numbers generated in a C application.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Yogi's corner</title><link href="http://www.everyogi.in/" rel="alternate"></link><link href="http://www.everyogi.in/feeds/misc.atom.xml" rel="self"></link><id>http://www.everyogi.in/</id><updated>2016-10-20T17:54:07+05:30</updated><entry><title>Dockerfile CMD vs ENTRYPOINT</title><link href="http://www.everyogi.in/misc/dockerfile_cmd_entrypoint/" rel="alternate"></link><published>2016-10-20T17:54:07+05:30</published><updated>2016-10-20T17:54:07+05:30</updated><author><name>Yogeswaran Thulasidoss</name></author><id>tag:www.everyogi.in,2016-10-20:misc/dockerfile_cmd_entrypoint/</id><summary type="html">&lt;p&gt;I had difficulty in understanding the difference between CMD and ENTRYPOINT in Dockerfile before I did the below experiment.  Hope this will help someone like me who cannot understand the difference from the &lt;a href="https://docs.docker.com/engine/reference/builder/"&gt;documentation&lt;/a&gt; or &lt;a href="http://stackoverflow.com/questions/21553353/what-is-the-difference-between-cmd-and-entrypoint-in-a-dockerfile"&gt;stackoverflow&lt;/a&gt;.
+&lt;br&gt;&lt;/br&gt;
+Consider the below docker file
+&lt;pre&gt;
+[ythulasi@YTHULASI-M-C341 01.BusyboxWithCMD]$ cat Dockerfile
+FROM busybox:latest
+CMD ["cat", "/etc/passwd"]
+&lt;/pre&gt;&lt;/p&gt;
+&lt;p&gt;Let's build an image and call it &lt;strong&gt;busy_cmd_image&lt;/strong&gt;
+&lt;pre&gt;
+[ythulasi@YTHULASI-M-C341 01.BusyboxWithCMD]$ docker build -t busy_cmd_image .
+Sending build context to Docker daemon 2.048 kB
+Step 1 : FROM busybox:latest
+ ---&amp;gt; 2b8fd9751c4c
+Step 2 : CMD cat /etc/passwd
+ ---&amp;gt; Using cache
+ ---&amp;gt; e4df0d0c0d67
+Successfully built e4df0d0c0d67
+&lt;/pre&gt;&lt;/p&gt;
+&lt;p&gt;Now, we ...&lt;/p&gt;</summary><category term="docker"></category><category term="dockerfile"></category><category term="how it works"></category></entry><entry><title>Random Rationalized</title><link href="http://www.everyogi.in/misc/random_rationalized/" rel="alternate"></link><published>2015-05-21T10:26:07+05:30</published><updated>2015-05-21T10:26:07+05:30</updated><author><name>Yogeswaran Thulasidoss</name></author><id>tag:www.everyogi.in,2015-05-21:misc/random_rationalized/</id><summary type="html">&lt;p&gt;I had a requirement to have random numbers generated in a C application.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdlib.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
 &lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
 &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;

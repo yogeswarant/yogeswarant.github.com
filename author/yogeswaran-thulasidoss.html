@@ -79,6 +79,32 @@
         <div class="col-sm-9">
 
             <article>
+                <h2><a href="http://www.everyogi.in/misc/dockerfile_cmd_entrypoint/">Dockerfile CMD vs ENTRYPOINT</a></h2>
+                <div class="summary"><p>I had difficulty in understanding the difference between CMD and ENTRYPOINT in Dockerfile before I did the below experiment.  Hope this will help someone like me who cannot understand the difference from the <a href="https://docs.docker.com/engine/reference/builder/">documentation</a> or <a href="http://stackoverflow.com/questions/21553353/what-is-the-difference-between-cmd-and-entrypoint-in-a-dockerfile">stackoverflow</a>.
+<br></br>
+Consider the below docker file
+<pre>
+[ythulasi@YTHULASI-M-C341 01.BusyboxWithCMD]$ cat Dockerfile
+FROM busybox:latest
+CMD ["cat", "/etc/passwd"]
+</pre></p>
+<p>Let's build an image and call it <strong>busy_cmd_image</strong>
+<pre>
+[ythulasi@YTHULASI-M-C341 01.BusyboxWithCMD]$ docker build -t busy_cmd_image .
+Sending build context to Docker daemon 2.048 kB
+Step 1 : FROM busybox:latest
+ ---&gt; 2b8fd9751c4c
+Step 2 : CMD cat /etc/passwd
+ ---&gt; Using cache
+ ---&gt; e4df0d0c0d67
+Successfully built e4df0d0c0d67
+</pre></p>
+<p>Now, we ...</p>
+<p><small><a href="http://www.everyogi.in/misc/dockerfile_cmd_entrypoint/#disqus_thread" data-disqus-identifier="dockerfile_cmd_entrypoint">View comments</a>.</small></p>                    <a class="btn btn-default btn-xs" href="http://www.everyogi.in/misc/dockerfile_cmd_entrypoint/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="http://www.everyogi.in/misc/random_rationalized/">Random Rationalized</a></h2>
                 <div class="summary"><p>I had a requirement to have random numbers generated in a C application.</p>
 <div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
@@ -171,6 +197,11 @@ question having come from C background.</p>
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
                 <ul class="list-group" id="recentposts">
                     <li class="list-group-item">
+                        <a href="http://www.everyogi.in/misc/dockerfile_cmd_entrypoint/">
+                            Dockerfile CMD vs ENTRYPOINT
+                        </a>
+                    </li>
+                    <li class="list-group-item">
                         <a href="http://www.everyogi.in/misc/random_rationalized/">
                             Random Rationalized
                         </a>
@@ -208,7 +239,7 @@ question having come from C background.</p>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2015 Yogeswaran Thulasidoss
+         <div class="col-xs-10">&copy; 2016 Yogeswaran Thulasidoss
             &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
