@@ -2,7 +2,7 @@
 <html lang="en"
 >
 <head>
-    <title>Random Rationalized - Yogi's corner</title>
+    <title>Proxy and port forwarding - Yogi's corner</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -11,11 +11,11 @@
 
     <link href="http://www.everyogi.in/images/logo.jpeg" rel="icon">
 
-<link rel="canonical" href="http://www.everyogi.in/misc/random_rationalized/">
+<link rel="canonical" href="http://www.everyogi.in/misc/proxy_port_forwarding/">
 
         <meta name="author" content="Yogeswaran Thulasidoss" />
-        <meta name="keywords" content="random,how it works" />
-        <meta name="description" content="I had a requirement to have random numbers generated in a C application. #include &lt;stdlib.h&gt; #include &lt;stdio.h&gt; int main() { int i = 0; for (i = 0; i &lt; 5; i++) { printf(&#34;Random number %d = %ld\n&#34;, i, random()); } return 0; } I ran the code once and saw that random numbers were getting generated. But to my surprise when I ran the code second time, I saw the same numbers getting printed. What??? Does it mean random numbers are predictable? If so, why is it called random? Random and Predictable words literally contradicting each other. But I remember using random.random ..." />
+        <meta name="keywords" content="haproxy,ssh,proxy,reverse-proxy" />
+        <meta name="description" content="This article is more like a case study on when to use proxies and when to just stick to simple port forwarder. Also discusses in detail on what each of those is, and the tools falling under each category. At office, we have our solution - basically a bunch of HTTP services, deployed on openstack which is not directly accessible from external network. We were asked to use a jump server (a.k.a jump box/jump host) - a server in the middle which has access to both, private network of the solution and the external network. For the using the ..." />
 
 
 
@@ -79,10 +79,10 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="http://www.everyogi.in/misc/random_rationalized/"
+                    <a href="http://www.everyogi.in/misc/proxy_port_forwarding/"
                        rel="bookmark"
-                       title="Permalink to Random Rationalized">
-                        Random Rationalized
+                       title="Permalink to Proxy and port forwarding">
+                        Proxy and port forwarding
                     </a>
                 </h1>
             </header>
@@ -92,133 +92,105 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2015-05-21T10:26:07+05:30"> Thu 21 May 2015</time>
+        <i class="fa fa-calendar"></i><time datetime="2016-11-16T18:40:19+05:30"> Wed 16 November 2016</time>
     </span>
 
 
 
 <span class="label label-default">Tags</span>
-	<a href="http://www.everyogi.in/tags/random.html">random</a>
+	<a href="http://www.everyogi.in/tags/haproxy.html">haproxy</a>
         /
-	<a href="http://www.everyogi.in/tags/how-it-works.html">how it works</a>
+	<a href="http://www.everyogi.in/tags/ssh.html">ssh</a>
+        /
+	<a href="http://www.everyogi.in/tags/proxy.html">proxy</a>
+        /
+	<a href="http://www.everyogi.in/tags/reverse-proxy.html">reverse-proxy</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>I had a requirement to have random numbers generated in a C application.</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-<span class="p">{</span>
-  <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Random number %d  =  %ld</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">random</span><span class="p">());</span>
-  <span class="p">}</span>
-  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+                <p>This article is more like a case study on when to use proxies and when to just stick to simple port forwarder.  Also discusses in detail on what each of those is, and the tools falling under each category.</p>
+<p>At office, we have our solution - basically a bunch of HTTP services, deployed on openstack which is not directly accessible from external network.  We were asked to use a <a href="https://en.wikipedia.org/wiki/Jump_server">jump server</a> (a.k.a jump box/jump host) - a server in the middle which has access to both, private network of the solution and the external network.</p>
+<p>For the using the services exposed by the stack we had to login to the jump server and make any HTTP requests for individual services.  It was too much of a burden to login to jump server to access API endpoints.  At the same time did not want to mess with the deployment scripts and expose all the instances to the external work.</p>
+<p>Then got the idea of installing and configuring HAProxy which will behave like a tunnel to forward the traffic as such the the API endpoints as they are just HTTP services.</p>
+<p>There were several teams using the same jump server and even they were having same stacks/same HTTP Services deployed within.  Therefore starting following the convention of using a prefix for each stack.  We had around 10 services getting exposed and all the services were prefixed with "1" in their port numbers.  It was easy to configure the test scripts to point to these services without much of a change.</p>
+<p>I was happy about what I did and explained this to the team.  The actual fun started then.</p>
+<p>One my colleague asked </p>
+<blockquote>
+<p>"What is HAProxy", </p>
+</blockquote>
+<p>I replied </p>
+<blockquote>
+<p>"It is a reverse proxy."  </p>
+</blockquote>
+<p>Then he asked </p>
+<blockquote>
+<p>"Why is that called so?  Is there anything called as forward proxy, if so, what is the difference between the two?"</p>
+</blockquote>
+<p>Other asked </p>
+<blockquote>
+<p>"How easy is it to configure HAProxy?"</p>
+</blockquote>
+<p>And there was one more question, </p>
+<blockquote>
+<p>"Is there a need to install HAProxy in this case, can't this not be solved using simple SSH port forwarder?"</p>
+</blockquote>
+<p>And the last one was </p>
+<blockquote>
+<p>"On which network layer does HAProxy operate?  Can it forward only HTTP Traffic?"</p>
+</blockquote>
+<p>I decided to find answers to all these questions and this article is the result of that.</p>
+<h3 id="how-easy-is-it-to-configure-haproxy">How easy is it to configure HAProxy?</h3>
+<p>Configuring HAProxy (version 1.6.3) for this use case is simple.</p>
+<p>In /etc/haproxy/haproxy.cfg, define a frontend and its corresponding backend.</p>
+<div class="highlight"><pre><span></span>frontend myservice
+    bind 0.0.0.0:18888
+    default_backend myservice
+
+backend myservice
+    balance roundrobin
+    server myservice 192.168.224.143:8888 check
 </pre></div>
 
 
-<p>I ran the code once and saw that random numbers were getting generated.</p>
-<p>But to my surprise when I ran the code second time, I saw the same numbers getting printed.</p>
-<blockquote>
-<p>What??? Does it mean random numbers are predictable? If so, why is it called random?
-<code>Random</code> and <code>Predictable</code> words literally contradicting each other.</p>
-</blockquote>
-<p>But I remember using random.random() in Python which each time gave different output.</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">random</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-  <span class="k">print</span> <span class="n">random</span><span class="p">()</span>
+<p>frontend says start listening on port 18888 on (0.0.0.0) all interfaces in this machine and forward it to backend service myservice which is actually listening in port 8888 on 192.168.224.143.</p>
+<h3 id="what-is-reverse-proxy">What is reverse proxy?</h3>
+<p>Reverse proxy is a entity on the server side which will recieve all the requests on behalf of the server and forwards it to the actual server that is residing in the same network.</p>
+<h3 id="what-is-the-difference-between-forward-proxy-an-reverse-proxy">What is the difference between forward proxy an reverse proxy?</h3>
+<p>It is only difference in perception i.e on whose behalf is this middle man is entering the picture.<br />
+As we saw earlier, if the server itself brings something before it to act like a server on its behalf - that something is called reverse proxy.
+If the client brings something in front of it to act like a client on its behalf while talking to the server - that something is called a forward proxy.</p>
+<h3 id="ssh-port-forwarding-vs-haproxy">SSH Port forwarding Vs HAProxy</h3>
+<p>The use case defined above is simple, in this case, load balancing functionality is not needed and it is just one-to-one mapping between the machines. Therefore, for this scenario ssh port forwarding suites the best.  One more advantage is that there is no extra installation needed, mostly all distributions comes bundled with ssh and servers run sshd.</p>
+<h3 id="how-to-do-port-forwarding-using-ssh">How to do port forwarding using ssh?</h3>
+<div class="highlight"><pre><span></span>ssh -L [bind_address:]port:host:hostport
+
+Specifies that the given port on the local (client) host is to be forwarded to the given host and port on
+the remote side.  
 </pre></div>
 
 
-<p>Each time I executed this code I got different set of output.</p>
-<p>Is the random function implementation in libc is so buggy?  Of course, cannot be!!!</p>
-<p>Oh wait. Are we missing something here.</p>
-<blockquote>
-<p>If there is going to some algorithm for generating random numbers it means that we telling the computer to perform a series of steps and give us a result.  If the series of steps is defined it implies that the result is predictable.</p>
-</blockquote>
-<p>But people coming up with such algorithms would have definitely thought about this.</p>
-<blockquote>
-<p>They would have added some variable parameter into the equation making it unpredictable.  That variable parameter can be anything like - derived from current timestamp or current data in the network device.</p>
-</blockquote>
-<p>If so, does it mean Python implementors thought of this and libc implementors missed it?</p>
-<p>When I checked the man page of random() function in my Linux machine.  It said,</p>
-<blockquote>
-<p>The random() function uses a nonlinear additive feedback random  number generator  employing a default table of size 31 long integers to return successive pseudo-random numbers in the range from 0 to RAND_MAX.   The period  of  this  random  number generator is very large, approximately</p>
-</blockquote>
-<div class="highlight"><pre><span></span>   16 * ((2^31) - 1).
+<div class="highlight"><pre><span></span>ssh -R [bind_address:]port:host:hostport
+
+Specifies that the given port on the remote (server) host is to be forwarded to the given host and port on the local 
+side.  
 </pre></div>
 
 
-<h4 id="so-this-is-it-it-is-not-random-it-is-actually-pseudo-random">So, this is it.  It is not random it is actually pseudo-random.</h4>
-<p>Meaning of pseudorandom from dictionary,</p>
-<blockquote>
-<p>pseudorandom |ˌsjuːdəʊˈrandəm|
-adjective</p>
-<p>(of a number, a sequence of numbers, or any digital data) satisfying one or more statistical tests for <code>randomness but produced by a definite mathematical procedure.</code> most computers have built-in functions which will generate sequences of pseudorandom numbers.`</p>
-</blockquote>
-<p>Aha. We are there.  Whatever we discussed so far is making sense.</p>
-<blockquote>
-<p>Also, there can be a requirement, where, for some experiment which uses random numbers has to be reproducible.</p>
-</blockquote>
-<p>So thats the reason. Why random() function in libc is returning same sequence.  The same can be achieved even in Python using seed.</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
-<span class="kn">import</span> <span class="nn">random</span>
-
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Unseeded random number: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()))</span>
-
-        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Seeded random number: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()))</span>
-
-
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-        <span class="n">main</span><span class="p">()</span>
-</pre></div>
-
-
-<p>The output of the above code twice,</p>
-<div class="highlight"><pre><span></span><span class="o">[</span>ythulasi@YTHULASI-M-C341 test_random<span class="o">]</span>$ date <span class="o">&amp;&amp;</span> python ~/exp/python/test_random/ran.py
-Wed May <span class="m">20</span> 19:45:46 IST 2015
-Unseeded random number: 0.399506141684
-Unseeded random number: 0.591102825052
-Unseeded random number: 0.00522710909826
-Seeded random number: 0.62290169489
-Seeded random number: 0.741786989261
-Seeded random number: 0.795193565566
-
-<span class="o">[</span>ythulasi@YTHULASI-M-C341 test_random<span class="o">]</span>$ date <span class="o">&amp;&amp;</span> python ~/exp/python/test_random/ran.py
-Wed May <span class="m">20</span> 19:45:49 IST 2015
-Unseeded random number: 0.888964633885
-Unseeded random number: 0.000467464175557
-Unseeded random number: 0.0425654580676
-Seeded random number: 0.62290169489
-Seeded random number: 0.741786989261
-Seeded random number: 0.795193565566
-</pre></div>
-
-
-<p>The same seed returns the same sequence.</p>
-<p>So thats the feature of libc, which allows the caller to set <code>same</code> or <code>different</code>  seed each time based on the requirement.</p>
-<blockquote>
-<p>Moral of the story is,</p>
-<ul>
-<li>random numbers generated by computer are only pseudo random numbers.</li>
-</ul>
-<p>Seeds used in random numbers are meant for two reasons,</p>
-<ul>
-<li>
-<p>to increase the degree of randomness</p>
-</li>
-<li>
-<p>to make experiment that uses random numbers reproducible</p>
-</li>
-</ul>
-</blockquote>
+<p>For the use case discussed above, either of the two forms can be used.  </p>
+<p>To use -L option we should first loggin into jump server and run the command below command,</p>
+<p><code>$ ssh -N -f -L 18888:192.168.224.143:8888 username@127.0.0.1</code></p>
+<p><strong>-R</strong> option can be used from the local machine itself,</p>
+<p><code>$ ssh -N -f -R 18888:192.168.224.143:8888 username@jump_server_machine_ip</code></p>
+<p><strong>-N</strong> option is meant to say do not execute any command(don't take me to the bash shell of the remote machine).</p>
+<p><strong>-f</strong> to run ssh in the background.</p>
+<p>The man page of ssh is awesome, please refer to that for more details.</p>
+<h3 id="on-which-network-layer-does-haproxy-operate-can-it-forward-only-http-traffic">On which network layer does HAProxy operate?  Can it forward only HTTP Traffic?</h3>
+<p>Tag line of HAProxy says that it is "TThe Reliable, High Performance TCP/HTTP Load Balancer".  Therefore we can understand that it can operate on both TCP as well as HTTP layer.  The reason why I say "as well as" is that, it can understand HTTP traffic perform routing based on URL which cannot be achieved when a simple port forwarder is used.  SSH port forward operates on TCP layer.</p>
 <p>Happy hacking!!!</p>
-<p>This article was first published in <a href="http://www.chennainerd.in/blog/2015/05/21/random-rationalized/">chennainerd.in</a> on MAY 21ST, 2015.</p>
+<p>References:</p>
+<p><em><a href="http://unix.stackexchange.com/questions/115897/whats-ssh-port-forwarding-and-whats-the-difference-between-ssh-local-and-remot">http://unix.stackexchange.com/questions/115897/whats-ssh-port-forwarding-and-whats-the-difference-between-ssh-local-and-remot</a></em></p>
+<p><em><a href="http://stackoverflow.com/questions/224664/difference-between-proxy-server-and-reverse-proxy-server">http://stackoverflow.com/questions/224664/difference-between-proxy-server-and-reverse-proxy-server</a></em></p>
+<p><em><a href="http://nerderati.com/2011/03/17/simplify-your-life-with-an-ssh-config-file/">http://nerderati.com/2011/03/17/simplify-your-life-with-an-ssh-config-file/</a></em></p>
             </div>
             <!-- /.entry-content -->
     <hr />
@@ -239,8 +211,8 @@ Seeded random number: 0.795193565566
             /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
             var disqus_shortname = 'everyogi'; // required: replace example with your forum shortname
 
-                    var disqus_identifier = 'random_rationalized';
-                var disqus_url = 'http://www.everyogi.in/misc/random_rationalized/';
+                    var disqus_identifier = 'proxy_port_forwarding';
+                var disqus_url = 'http://www.everyogi.in/misc/proxy_port_forwarding/';
 
             var disqus_config = function () {
                 this.language = "en";
