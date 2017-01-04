@@ -15,7 +15,7 @@
 
         <meta name="author" content="Yogeswaran Thulasidoss" />
         <meta name="keywords" content="haproxy,ssh,proxy,reverse-proxy" />
-        <meta name="description" content="This article is more like a case study on when to use proxies and when to just stick to simple port forwarder. Also discusses in detail on what each of those is, and the tools falling under each category. At office, we have our solution - basically a bunch of HTTP services, deployed on openstack which is not directly accessible from external network. We were asked to use a jump server (a.k.a jump box/jump host) - a server in the middle which has access to both, private network of the solution and the external network. For the using the ..." />
+        <meta name="description" content="This article is more like a case study on when to use proxies and when to just stick to simple port forwarder. Also discusses in detail on what each of those is, and the tools falling under each category. At office, we have our solution - basically a bunch of HTTP services, deployed on openstack which is not directly accessible from external network. We were asked to use a jump server (a.k.a jump box/jump host) - a server in the middle which has access to both, private network of the solution and the external network. For using the services ..." />
 
 
 
@@ -110,11 +110,11 @@
                 </div>
                 <p>This article is more like a case study on when to use proxies and when to just stick to simple port forwarder.  Also discusses in detail on what each of those is, and the tools falling under each category.</p>
 <p>At office, we have our solution - basically a bunch of HTTP services, deployed on openstack which is not directly accessible from external network.  We were asked to use a <a href="https://en.wikipedia.org/wiki/Jump_server">jump server</a> (a.k.a jump box/jump host) - a server in the middle which has access to both, private network of the solution and the external network.</p>
-<p>For the using the services exposed by the stack we had to login to the jump server and make any HTTP requests for individual services.  It was too much of a burden to login to jump server to access API endpoints.  At the same time did not want to mess with the deployment scripts and expose all the instances to the external work.</p>
-<p>Then got the idea of installing and configuring HAProxy which will behave like a tunnel to forward the traffic as such the the API endpoints as they are just HTTP services.</p>
-<p>There were several teams using the same jump server and even they were having same stacks/same HTTP Services deployed within.  Therefore starting following the convention of using a prefix for each stack.  We had around 10 services getting exposed and all the services were prefixed with "1" in their port numbers.  It was easy to configure the test scripts to point to these services without much of a change.</p>
+<p>For using the services exposed by the stack we had to login to the jump server and make any HTTP requests for individual services.  It was too much of a burden to login to the jump server for accessing the API endpoints.  At the same time did not want to mess with the deployment scripts and expose all the instances to the external work.</p>
+<p>Then got the idea of installing and configuring HAProxy which will behave like a tunnel to forward the traffic as such to the API endpoints as they are just HTTP services.</p>
+<p>There were several teams using the same jump server and even they were having same stacks/same HTTP Services deployed within.  Therefore started following the convention of using a prefix for each stack.  We had around 10 services getting exposed and all the services were prefixed with "1" in their port numbers.  It was easy to configure the test scripts to point to these services without much of a change.</p>
 <p>I was happy about what I did and explained this to the team.  The actual fun started then.</p>
-<p>One my colleague asked </p>
+<p>One of my colleague asked </p>
 <blockquote>
 <p>"What is HAProxy", </p>
 </blockquote>
@@ -154,8 +154,8 @@ backend myservice
 
 <p>frontend says start listening on port 18888 on (0.0.0.0) all interfaces in this machine and forward it to backend service myservice which is actually listening in port 8888 on 192.168.224.143.</p>
 <h3 id="what-is-reverse-proxy">What is reverse proxy?</h3>
-<p>Reverse proxy is a entity on the server side which will recieve all the requests on behalf of the server and forwards it to the actual server that is residing in the same network.</p>
-<h3 id="what-is-the-difference-between-forward-proxy-an-reverse-proxy">What is the difference between forward proxy an reverse proxy?</h3>
+<p>Reverse proxy is an entity on the server side which will recieve all the requests on behalf of the server and forwards it to the actual server that is residing in the same network.</p>
+<h3 id="what-is-the-difference-between-forward-proxy-and-reverse-proxy">What is the difference between forward proxy and reverse proxy?</h3>
 <p>It is only difference in perception i.e on whose behalf is this middle man is entering the picture.<br />
 As we saw earlier, if the server itself brings something before it to act like a server on its behalf - that something is called reverse proxy.
 If the client brings something in front of it to act like a client on its behalf while talking to the server - that something is called a forward proxy.</p>
@@ -177,7 +177,7 @@ side.
 
 
 <p>For the use case discussed above, either of the two forms can be used.  </p>
-<p>To use -L option we should first loggin into jump server and run the command below command,</p>
+<p>To use -L option we should first login into jump server and run the below command,</p>
 <p><code>$ ssh -N -f -L 18888:192.168.224.143:8888 username@127.0.0.1</code></p>
 <p><strong>-R</strong> option can be used from the local machine itself,</p>
 <p><code>$ ssh -N -f -R 18888:192.168.224.143:8888 username@jump_server_machine_ip</code></p>
