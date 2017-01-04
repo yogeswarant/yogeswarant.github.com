@@ -11,15 +11,15 @@ This article is more like a case study on when to use proxies and when to just s
 
 At office, we have our solution - basically a bunch of HTTP services, deployed on openstack which is not directly accessible from external network.  We were asked to use a [jump server](https://en.wikipedia.org/wiki/Jump_server) (a.k.a jump box/jump host) - a server in the middle which has access to both, private network of the solution and the external network.
 
-For the using the services exposed by the stack we had to login to the jump server and make any HTTP requests for individual services.  It was too much of a burden to login to jump server to access API endpoints.  At the same time did not want to mess with the deployment scripts and expose all the instances to the external work.
+For using the services exposed by the stack we had to login to the jump server and make any HTTP requests for individual services.  It was too much of a burden to login to the jump server for accessing the API endpoints.  At the same time did not want to mess with the deployment scripts and expose all the instances to the external work.
 
-Then got the idea of installing and configuring HAProxy which will behave like a tunnel to forward the traffic as such the the API endpoints as they are just HTTP services.
+Then got the idea of installing and configuring HAProxy which will behave like a tunnel to forward the traffic as such to the API endpoints as they are just HTTP services.
 
-There were several teams using the same jump server and even they were having same stacks/same HTTP Services deployed within.  Therefore starting following the convention of using a prefix for each stack.  We had around 10 services getting exposed and all the services were prefixed with "1" in their port numbers.  It was easy to configure the test scripts to point to these services without much of a change.
+There were several teams using the same jump server and even they were having same stacks/same HTTP Services deployed within.  Therefore started following the convention of using a prefix for each stack.  We had around 10 services getting exposed and all the services were prefixed with "1" in their port numbers.  It was easy to configure the test scripts to point to these services without much of a change.
 
 I was happy about what I did and explained this to the team.  The actual fun started then.
 
-One my colleague asked 
+One of my colleague asked 
 > "What is HAProxy", 
 
 I replied 
@@ -58,9 +58,9 @@ frontend says start listening on port 18888 on (0.0.0.0) all interfaces in this 
 
 ### What is reverse proxy?
 
-Reverse proxy is a entity on the server side which will recieve all the requests on behalf of the server and forwards it to the actual server that is residing in the same network.
+Reverse proxy is an entity on the server side which will recieve all the requests on behalf of the server and forwards it to the actual server that is residing in the same network.
 
-### What is the difference between forward proxy an reverse proxy?
+### What is the difference between forward proxy and reverse proxy?
 
 It is only difference in perception i.e on whose behalf is this middle man is entering the picture.  
 As we saw earlier, if the server itself brings something before it to act like a server on its behalf - that something is called reverse proxy.
@@ -88,7 +88,7 @@ side.
 
 For the use case discussed above, either of the two forms can be used.  
 
-To use -L option we should first loggin into jump server and run the command below command,
+To use -L option we should first login into jump server and run the below command,
 
 ```$ ssh -N -f -L 18888:192.168.224.143:8888 username@127.0.0.1```
 
