@@ -15,7 +15,7 @@
 
         <meta name="author" content="Yogeswaran Thulasidoss" />
         <meta name="keywords" content="c,bits,2's complement" />
-        <meta name="description" content="This is a short write-up two&#39;s complement, which, in my humble opinion is one of the great idea to which entire computer industry should be thankful to. I remember, in my school days when computer science subject was taught without computer, there used to be problems to find binary equivalent of a number. Binary equivalent of 5 is 101. On top of this there used to be problems to find the one&#39;s complement of it and two&#39;s complement of it. One&#39;s complement of 0101 is 1010 (Simply inverting 1 to 0 and 0 to 1). Two ..." />
+        <meta name="description" content="This is a short write-up two&#39;s complement, which, in my humble opinion is one of the great idea to which entire computer industry should be thankful to. I remember, in my school days when computer science subject was taught without computer, there used to be problems to find binary equivalent of a number. Binary equivalent of 5 is 0101. (Considering bit length of 4). On top of this, there used to be problems to find the one&#39;s complement of it and two&#39;s complement of it. One&#39;s complement of 0101 is 1010 (Simply inverting 1 to 0 ..." />
 
 
 
@@ -108,8 +108,8 @@
                 </div>
                 <p>This is a short write-up two's complement, which, in my humble opinion is one of the great idea to which entire computer industry should be thankful to.</p>
 <p>I remember, in my school days when computer science subject was taught without computer, there used to be problems to find binary equivalent of a number.</p>
-<p>Binary equivalent of 5 is 101.</p>
-<p>On top of this there used to be problems to find the one's complement of it and two's complement of it.</p>
+<p>Binary equivalent of 5 is 0101. (Considering bit length of 4).</p>
+<p>On top of this, there used to be problems to find the one's complement of it and two's complement of it.</p>
 <p>One's complement of 0101 is 1010 (Simply inverting 1 to 0 and 0 to 1).</p>
 <p>Two's complement of 0101 is 1010 + 1 which is equal to 1011.</p>
 <p>I was not curious to ask what is the need for one's complement or two's complement.  And I also don't remember seeing a problem like, finding a binary equivalent of a negative number.</p>
@@ -119,7 +119,7 @@
 <li>Computer already operates in binary, in that case, why to convert it into human readable(decimal) and then find the binary.</li>
 <li>Not all problems needs to be solved like the way human solves it, algorithms should leverage the machine's capabilities. </li>
 </ol>
-<p>The above program was not able to solve when negative values were passed.</p>
+<p>Moreover this algorithm will not able to handle negative numbers.</p>
 <p>Then quickly opened a Python shell and printed binary equivalent of 5 and -5.</p>
 <div class="highlight"><pre><span></span>Python 2.7.10 (default, Jul 30 2016, 18:31:42)
 [GCC 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.34)] on darwin
