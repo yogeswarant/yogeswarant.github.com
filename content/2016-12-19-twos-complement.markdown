@@ -11,9 +11,9 @@ This is a short write-up two's complement, which, in my humble opinion is one of
 
 I remember, in my school days when computer science subject was taught without computer, there used to be problems to find binary equivalent of a number.
 
-Binary equivalent of 5 is 101.
+Binary equivalent of 5 is 0101. (Considering bit length of 4).
 
-On top of this there used to be problems to find the one's complement of it and two's complement of it.
+On top of this, there used to be problems to find the one's complement of it and two's complement of it.
 
 One's complement of 0101 is 1010 (Simply inverting 1 to 0 and 0 to 1).
 
@@ -28,7 +28,7 @@ There were couple of learnings from this,
 1. Computer already operates in binary, in that case, why to convert it into human readable(decimal) and then find the binary.
 2. Not all problems needs to be solved like the way human solves it, algorithms should leverage the machine's capabilities. 
 
-The above program was not able to solve when negative values were passed.
+Moreover this algorithm will not able to handle negative numbers.
 
 Then quickly opened a Python shell and printed binary equivalent of 5 and -5.
 ```
