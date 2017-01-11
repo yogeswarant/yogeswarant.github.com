@@ -105,7 +105,7 @@ The man page of ssh is awesome, please refer to that for more details.
 
 ### On which network layer does HAProxy operate?  Can it forward only HTTP Traffic?
 
-Tag line of HAProxy says that it is "TThe Reliable, High Performance TCP/HTTP Load Balancer".  Therefore we can understand that it can operate on both TCP as well as HTTP layer.  The reason why I say "as well as" is that, it can understand HTTP traffic perform routing based on URL which cannot be achieved when a simple port forwarder is used.  SSH port forward operates on TCP layer.
+Tag line of HAProxy says that it is "The Reliable, High Performance TCP/HTTP Load Balancer".  Therefore we can understand that it can operate on both TCP as well as HTTP layer.  The reason why I say "as well as" is that, it can understand HTTP traffic perform routing based on URL which cannot be achieved when a simple port forwarder is used.  SSH port forward operates on TCP layer.
 
 Happy hacking!!!
 
