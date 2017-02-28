@@ -1,0 +1,45 @@
+---
+title: Blog story
+date: 2017-01-13 18:16:19 +0530
+comments: true
+author: Yogeswaran Thulasidoss
+tags: blogging
+category: 
+slug: my_blog
+---
+
+In this article, I wanted to share about various people and factors motivating me to start this blog and the tools I used to make it live.
+
+**[Fizer](http://www.github.com/fizerkhan)**, who runs [www.chennainerd.in](http://www.chennainerd.in) insisted me to start writing and was ready to publish my articles in it.  He emphasised on ***creating a brand on the internet, which can in-a-way be achieved through blogging***.  He was patient enough to do the proof reading and educated me about [hacker news](https://news.ycombinator.com) for taking it to larger audience.  It is only because of his influence this blog is live.
+
+
+**Software Engineer's Life Manual by John Sonmez.**  One of the best book I have ever read.  I came to know about this book through the Python Podcast ["Talk Python to Me"](http://www.talkpython.fm).
+The author creates awareness about everything any software engineer should know.  This is not a regular book which focuses on one thing and dwells deep on that subject.  It was a surprise to have a complete package starting from building the attitude, professional skill, financial independence, health and much more.  This book definitely throws light on few potentially grey areas which are missed by software engineers.  In this book, he ***stresses the point on blogging and how it brings in clarity to our understanding and how it becomes means for networking***.  Author also gives a heads-up about the effect of publishing in [hacker news](https://news.ycombinator.com) and cautions people to be thick-skinned to take up the comments.
+
+**Talk Python to Me.**  To be honest, I am an infrequent listener to this podcast.  One particular episode *[#69 Write an Excellent Programming Blog](https://talkpython.fm/episodes/show/69/write-an-excellent-programming-blog)* interview with Jesse Davis was dedicated to blogging.  Jesse Davis was simply amazing in explaining ***how to organize the thoughts and how to classify the type of the article***.  This is definitely a beginner's guide to get started with blogging.
+
+### Resistance factors
+
+**Blogger and Wordpress**
+
+This was years back in 2011 when I was cooking for myself, I was enjoying cooking and thought I'll share my receipes with others so wanted to start a blog for that.  Blogger and Wordpress were the first to get listed when googled.  My first impression was "I was not having control of my content".  I would have liked it, if I was not a software engineer.  Deciding the layout upfront, not having a free hand in customizing, not able to link with a custom domain name, literally killed by intention to write.  My interest to blog vanished in couple of days.  Hope things might have changed now in Blogger and Wordpress.
+
+**Jekyll**
+
+After Fizer introduced me to github pages I was excited so much and I wanted to have my own blogging site.  Github's documentation talks more about Jekyll for generating static pages.  Ruby users please pardon me, but I have to say this.  It was a horrible experience trying to setup Jekyll on my machine - Gem version, RVM version, blah blah blah. For some reason, I had to setup Jekyll on a different machine and everything appeared completely new again.
+
+### Let's see the tools that helped me.
+
+**Pelican**
+
+Pelican is a static site generator written in Python.  Really easy to setup, unfortunately not that popular.  With pelican, I was able to get the site up live in no time.  Makefile way to generate and publish the content makes it more intuitive. 
+
+**Two brilliant examples**
+
+Though pelican was easy to setup, I was not able to find a theme of my taste.  There were too many listed in [Pelican Themes](http://pelicanthemes.com) but most of them were old fashioned.
+
+[http://beneathdata.com/how-to/how-i-built-this-website/](http://beneathdata.com/how-to/how-i-built-this-website/) and [https://www.notionsandnotes.org/tech/web-development/pelican-static-blog-setup.html](https://www.notionsandnotes.org/tech/web-development/pelican-static-blog-setup.html) were really amazing tutorials which were handy that gave step by step instructions to use bootstrap3 theme and ways to customize it.
+
+> For those who read this far, you can consider "Talk Python to Me", "Software Engineer's Life Manual by John Sonmez" and "Pelican links" as the key takeaways.
+
+Happy blogging!!!
