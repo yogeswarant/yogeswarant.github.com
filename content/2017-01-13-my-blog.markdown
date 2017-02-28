@@ -18,7 +18,7 @@ The author creates awareness about everything any software engineer should know.
 
 **Talk Python to Me.**  To be honest, I am an infrequent listener to this podcast.  One particular episode *[#69 Write an Excellent Programming Blog](https://talkpython.fm/episodes/show/69/write-an-excellent-programming-blog)* interview with Jesse Davis was dedicated to blogging.  Jesse Davis was simply amazing in explaining ***how to organize the thoughts and how to classify the type of the article***.  This is definitely a beginner's guide to get started with blogging.
 
-### Resistance factors
+### Resistance factors.
 
 **Blogger and Wordpress**
 
@@ -40,6 +40,11 @@ Though pelican was easy to setup, I was not able to find a theme of my taste.  T
 
 [http://beneathdata.com/how-to/how-i-built-this-website/](http://beneathdata.com/how-to/how-i-built-this-website/) and [https://www.notionsandnotes.org/tech/web-development/pelican-static-blog-setup.html](https://www.notionsandnotes.org/tech/web-development/pelican-static-blog-setup.html) were really amazing tutorials which were handy that gave step by step instructions to use bootstrap3 theme and ways to customize it.
 
+### Motivation.
+
+Last article that I published ["2's complement - you beauty"](http://everyogi.in/c/twos_complement/) got pretty decent response in [hacker news](https://news.ycombinator.com/item?id=13371742) which I never expected and has given me some motivation.  
+
 > For those who read this far, you can consider "Talk Python to Me", "Software Engineer's Life Manual by John Sonmez" and "Pelican links" as the key takeaways.
+
 
 Happy blogging!!!
