@@ -2,7 +2,7 @@
 <html lang="en"
 >
 <head>
-    <title>I am a C programmer. Why I love AngularJS? - Yogi's corner</title>
+    <title>Fear of Git - Yogi's corner</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -11,11 +11,11 @@
 
     <link href="http://www.everyogi.in/images/logo.jpeg" rel="icon">
 
-<link rel="canonical" href="http://www.everyogi.in/javascript/i_am_a_c_programmer_why_i_love_angularjs/">
+<link rel="canonical" href="http://www.everyogi.in/misc/fear_of_git/">
 
         <meta name="author" content="Yogeswaran Thulasidoss" />
-        <meta name="keywords" content="angularjs,javascript,html,opinion" />
-        <meta name="description" content="The intended audience for this blog are not the people who have profound knowledge in HTML and Javascript. This is only for those who are in inertia to experiment with web development. Also, please be aware that this is not beginner&#39;s tutorial for AngularJS. I have this habit of trying some web related stuff rarely once in a year. Couple of years back on a fine morning started to play with jQuery and was impressed by its power. But at the end of the day thought there is so much to APIs to remember or at least be aware ..." />
+        <meta name="keywords" content="Git" />
+        <meta name="description" content="The intention of this article is not to explain how Git works. It is just to explain how Git should be approached. The beginning In 2010, I got introduced to Git. Git was a buzz word then. Just skimmed through its features and thought how could there be any other source control not having all these. I was saying to myself, Git is the most obvious way any source control should work. But that was a pretty immature thought, because I did not know what is actually happening inside Git. Later, was working in Git with the so called basic ..." />
 
 
 
@@ -50,10 +50,10 @@
                         <li >
                             <a href="http://www.everyogi.in/category/c.html">C</a>
                         </li>
-                        <li class="active">
+                        <li >
                             <a href="http://www.everyogi.in/category/javascript.html">Javascript</a>
                         </li>
-                        <li >
+                        <li class="active">
                             <a href="http://www.everyogi.in/category/misc.html">Misc</a>
                         </li>
                         <li >
@@ -79,10 +79,10 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="http://www.everyogi.in/javascript/i_am_a_c_programmer_why_i_love_angularjs/"
+                    <a href="http://www.everyogi.in/misc/fear_of_git/"
                        rel="bookmark"
-                       title="Permalink to I am a C programmer. Why I love AngularJS?">
-                        I am a C programmer. Why I love AngularJS?
+                       title="Permalink to Fear of Git">
+                        Fear of Git
                     </a>
                 </h1>
             </header>
@@ -92,83 +92,68 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2014-02-22T19:01:42+05:30"> Sat 22 February 2014</time>
+        <i class="fa fa-calendar"></i><time datetime="2017-03-31T08:37:00+05:30"> Fri 31 March 2017</time>
     </span>
 
 
 
 <span class="label label-default">Tags</span>
-	<a href="http://www.everyogi.in/tags/angularjs.html">angularjs</a>
-        /
-	<a href="http://www.everyogi.in/tags/javascript.html">javascript</a>
-        /
-	<a href="http://www.everyogi.in/tags/html.html">html</a>
-        /
-	<a href="http://www.everyogi.in/tags/opinion.html">opinion</a>
+	<a href="http://www.everyogi.in/tags/git.html">Git</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>The intended audience for this blog are not the people who have profound knowledge in HTML and Javascript.  This is only for those who are in inertia to experiment with web development.  Also, please be aware that this is not beginner's tutorial for AngularJS.</p>
-<p>I have this habit of trying some web related stuff rarely once in a year.  Couple of years back on a fine morning started to play with jQuery and was impressed by its power.  But at the end of the day thought there is so much to APIs to remember or at least be aware of. Then decided, it's not going to work out for me and that was the last time I tried anything on the web.</p>
-<p>Last week I had a chance to play with AngularJS and my immediate reaction was "WoW!!!". After my first encounter with AngularJS I thought this is not going to be just one day affair and fell in love with AngularJS. During the course of this blog I'll walk you through the features of AngularJS which impressed me.</p>
-<h4 id="framework-and-library">Framework and library:</h4>
-<p>First of all, AngularJS is not library like jQuery, it is a framework.  So there is no onus of remembering the APIs.</p>
-<h4 id="empowering-html">Empowering HTML:</h4>
-<p>HTML was born when the intention of web was only to display static content.  As the name suggests that is only a markup language - nothing wrong, nobody to blame. The people who designed that had only scoped for that.  But now, the web is not that simple.
-And being a C programmer I wished if there is anyway to add if condition, loop, block scope in HTML.  AngularJS comes as a prosthetic limb for the handicapped HTML.</p>
-<p>To display an element only when a condition is met (i.e.,) having a if construct. This is possible in AngularJS using <code>ng-if</code> or <code>ng-show</code> directive.</p>
-<div class="highlight"><pre><span></span><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">ng-model=</span><span class="s">&quot;customer.name&quot;</span> <span class="na">ng-if=</span><span class="s">&quot;customer.edit&quot;</span><span class="nt">&gt;</span>
-<span class="nt">&lt;span</span> <span class="na">ng-bind=</span><span class="s">&quot;customer.name&quot;</span> <span class="na">ng-if=</span><span class="s">&quot;!customer.edit&quot;</span><span class="nt">&gt;&lt;/span&gt;</span>
-</pre></div>
-
-
-<p>If customer.edit is set true, customer.name will be displayed in text box, else will be displayed in span.</p>
-<p>To iterate through a array of items and create a <code>&lt;ul&gt;</code> or <code>&lt;li&gt;</code> or even populate a
-<code>&lt;table&gt;</code>.  <code>ng-repeat</code> directive does the job.</p>
-<div class="highlight"><pre><span></span><span class="nt">&lt;table&gt;</span>
-    <span class="nt">&lt;thead&gt;</span>
-        <span class="nt">&lt;tr&gt;</span>
-            <span class="nt">&lt;th&gt;</span>Name<span class="nt">&lt;/th&gt;</span>
-            <span class="nt">&lt;th&gt;</span>Amount<span class="nt">&lt;/th&gt;</span>
-            <span class="nt">&lt;th&gt;</span>ROI<span class="nt">&lt;/th&gt;</span>
-        <span class="nt">&lt;/tr&gt;</span>
-    <span class="nt">&lt;/thead&gt;</span>
-    <span class="nt">&lt;tbody&gt;</span>
-        <span class="nt">&lt;tr</span> <span class="na">ng-repeat=</span><span class="s">&quot;customer in customers&quot;</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;td</span> <span class="na">ng-bind=</span><span class="s">&quot;customer.name&quot;</span><span class="nt">&gt;&lt;/td&gt;</span>
-            <span class="nt">&lt;td</span> <span class="na">ng-bind=</span><span class="s">&quot;customer.amount&quot;</span><span class="nt">&gt;&lt;/td&gt;</span>
-            <span class="nt">&lt;td</span> <span class="na">ng-bind=</span><span class="s">&quot;customer.roi&quot;</span><span class="nt">&gt;&lt;/td&gt;</span>
-        <span class="nt">&lt;/tr&gt;</span>
-    <span class="nt">&lt;/tbody&gt;</span>
-<span class="nt">&lt;/table&gt;</span>
-</pre></div>
-
-
-<p>To restrict the scope of variables and functions within a block, <code>ng-controller</code> can be used.
-Though the use of <code>ng-controller</code> is more than that.</p>
-<div class="highlight"><pre><span></span><span class="nt">&lt;script&gt;</span>
-    angular.module(&quot;bank&quot;, []).
-    controller(&#39;BankController&#39;,
-        function BankController($scope) {
-            $scope.customers = [name:&#39;kansamy&#39;, amount:&#39;1000&#39;, roi:&#39;9&#39;, edit:0}, {name:&#39;munsamy&#39;, amount:&#39;300&#39;, roi:&#39;2&#39;, edit:0}];
-            $scope.customer = {name:&#39;&#39;, amount:&#39;&#39;, roi:&#39;&#39;, edit:0};
-        });
-<span class="nt">&lt;script&gt;</span>
-<span class="nt">&lt;body</span> <span class="na">ng-app=</span><span class="s">&quot;bank&quot;</span> <span class="na">ng-controller=</span><span class="s">&quot;BankController&quot;</span><span class="nt">&gt;</span>
-...
-<span class="nt">&lt;/body&gt;</span>
-</pre></div>
-
-
-<p>The scope of bank controller is throughout the <code>&lt;body&gt;</code>.
-This scope can be restricted to any <code>&lt;div&gt;</code> or any other element by setting
-<code>ng-controller</code> accordingly. <code>$scope</code> variable has a special meaning mapping to
-the scope of the controller.</p>
-<p>There is much more talk to about AngularJS - what I have captured here is only the picture of love at first sight.</p>
-<p>I have hosted a simple no use application exercising these features of AngularJS
-<a href="https://brilliant-fire-1717.firebaseapp.com/bank.html">https://brilliant-fire-1717.firebaseapp.com/bank.html</a></p>
-<p>No wonder, these features can one day become integral part of HTML.</p>
-<p>This article was first published in <a href="http://www.chennainerd.in/blog/2014/02/22/i-am-a-c-programmer-why-i-love-angularjs/">chennainerd.in</a> on FEB 22ND, 2014.</p>
+                <p>The intention of this article is not to explain how Git works.  It is just to explain how Git should be approached.</p>
+<h2 id="the-beginning">The beginning</h2>
+<p>In 2010, I got introduced to Git. <strong>Git</strong> was a buzz word then. Just skimmed through its features and thought how could there be any other source control not having all these.  </p>
+<blockquote>
+<p><em>I was saying to myself,
+Git is the most obvious way any source control should work.<br />
+But that was a pretty immature thought, because I did not know what is actually happening inside Git.</em></p>
+</blockquote>
+<p>Later, was working in Git with the so called basic commands.  I was able to manage with just few commands <strong>git add</strong>, <strong>git commit</strong>, <strong>git pull</strong>, <strong>git push</strong>.  To be honest, dint even use <strong>git rebase</strong> or <strong>git merge</strong> explicitly.  Having come from SVN background I thought those are for power users.</p>
+<p>After a while, took a <a href="http://www.codeschool.com">codeschool</a> course on basics of Git.  From what I remember, even they were using only these basic commands as part of their course.  So, never bothered to explore more after that.</p>
+<p>Then I was put in a project whose source is maintained by a different team and we were asked to contribute to it by creating pull request.  This is the time I really understood that I don't know Git.  It was no more a linear workflow I was used to before.  In this project I faced all possible issues that might arise in parallel development.</p>
+<blockquote>
+<p><em>Then started hating Git and thought how easy my life was when I was using SVN.</em></p>
+<p><em>Anytime before pushing my code into Git I used to google for atleast 10 minutes to find the commands to help in that situation.</em></p>
+<p><em>After each push, my aversion towards Git was increasing.  Was thinking why people are not using SVN which is much simpler.  Also thought, Git is meant for users like its author.</em></p>
+</blockquote>
+<h2 id="basic-merge-operation">Basic merge operation</h2>
+<p>In SVN, when I wanted to merge my code with the latest in the repo I would do the following. I will have two folders.  One folder having source with my changes and the other folder just downloaded from the server.  Mostly will be using tool like Beyond Compare (running in trial version) to compare the difference and move the changes from <strong>my changes folder</strong> to <strong>the latest code folder</strong>.</p>
+<blockquote>
+<p><em>The merge operation was fully manual but I was having the complete control and knew what will be the end result.</em></p>
+</blockquote>
+<p>I am not sure if I used SVN correctly, but this was the mentality with which I was approaching Git.  </p>
+<blockquote>
+<p><em>Also, I was under the impression that source control tool would be dumb, meaning that it would only maintain whatever content we are giving under some revision. Merging the code would be the job of the user.</em></p>
+</blockquote>
+<p>Did not wanted Git to do the merge on its own because was worried how could a source control tool understand the semantics of the code.</p>
+<p>This is the first paradigm shift that needs to happen when moving to Git.  We need to understand that we are not asking Git to arbitrarily merge two text files lying somewhere.  There is history associated with that file and we are consciously making a decision to add our changes on top of those changes.  </p>
+<blockquote>
+<p><em>In case any tangential code was added by others and our changes were added on top of it, how can source control tool identify these?</em></p>
+</blockquote>
+<p>Valid question, but we'll end up in the same situation even if we merge it manually.  Definitely we will not be able to catch all these even when we merge using Beyond Compare.  </p>
+<blockquote>
+<p><em>Obviously, the only way to solve this is to have unit tests which will make sure the merge has not broken anything.</em></p>
+</blockquote>
+<p>Though this sounds obvious it took a lot of time for me to understand this.</p>
+<h2 id="sequence-of-commands">Sequence of commands</h2>
+<p>There is no one-way or sequence of commands to help in all situation.  Each time the problem might be different and the command to use in that particular situation might be different.  This is one other thing very different compared to what I have been following in SVN.</p>
+<p>There used to be instructions like <strong>svn checkout</strong>, add you changes and then <strong>svn commit</strong>.  We can blindly follow these two steps and get our things done in SVN.</p>
+<p>In Git, I tried following a series of commands and ended up creating pull request with 94 commits but I had made only 2 commits on my own.</p>
+<p>With Git, don't expect a sequence of commands to help in all situation.  Understand the requirement and decide on what commands to use in that situation.</p>
+<h2 id="variety-of-commands">Variety of commands</h2>
+<p>Assuming that you are mentally prepared and clear about the merge and realized that there is no sequence of commands to help in all situations,</p>
+<blockquote>
+<p><em>the variety of commands and its options makes Git, daunting.</em></p>
+</blockquote>
+<p>The only pill for this issue is to understand the internals of Git.</p>
+<h2 id="understanding-the-internals">Understanding the internals</h2>
+<p>I don't think we need to know what's happening behind the scenes in SVN to use SVN.</p>
+<p>But lately understood that Git can only be tamed if we understand what's happening in the background.</p>
+<p>When you are clear on how Git works then there is nothing as elegant as Git.</p>
+<p>Even now I wont say that I know Git completely, but one thing is of sure, my fear of Git is gone after this basic understanding.</p>
+<p>Happy hacking!!!</p>
             </div>
             <!-- /.entry-content -->
     <hr />
@@ -189,8 +174,8 @@ the scope of the controller.</p>
             /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
             var disqus_shortname = 'everyogi'; // required: replace example with your forum shortname
 
-                    var disqus_identifier = 'i_am_a_c_programmer_why_i_love_angularjs';
-                var disqus_url = 'http://www.everyogi.in/javascript/i_am_a_c_programmer_why_i_love_angularjs/';
+                    var disqus_identifier = 'fear_of_git';
+                var disqus_url = 'http://www.everyogi.in/misc/fear_of_git/';
 
             var disqus_config = function () {
                 this.language = "en";
